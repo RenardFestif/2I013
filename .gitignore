@@ -28,3 +28,4 @@ build.xml
 *.mf
 *.properties
 /MusiDROID/build/
+/MusiDROID/sound/

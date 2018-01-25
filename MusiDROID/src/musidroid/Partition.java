@@ -8,7 +8,7 @@ import l2i013.musidroid.util.NoteName;
 
 public class Partition {
 	
-	private int t;
+	private int t;                                  //t correspond à la cadence
 	private ArrayList<InstrumentPart> instruments;
 	
 	public Partition(int t){
@@ -25,14 +25,9 @@ public class Partition {
 		return instruments.get(i);
 	}
 	
-	/*public ArrayList<InstrumentPart> getParts(){
-		ArrayList<InstrumentPart> liste = new ArrayList<>();
-		if(liste.isEmpty())
-			return null;
-		
-		
-		return liste;
-	}*/
+	public ArrayList<InstrumentPart> getParts(){
+		return instruments;
+	}
 	
 	public int getSize(){
 		return instruments.size(); 
