@@ -28,36 +28,55 @@ public class InstrumentPart {
     public InstrumentName getInstrument(){ return n; }
     public int getInstrumentNum(){ return n.getNum(); }
     public int getOctave(){ return o; }
+    
+    /*Used Method for getNotes()*/
+    private ArrayList<Note> copyNotes (){
+        ArrayList<Note> ret = new ArrayList<>();
+        for (int i=0; i<notes.size(); i++){
+            ret.add(notes.get(i));
+        }
+        return ret;
+    }
+
 
     public ArrayList<Note> getNotes(){ //ERROR
-            if(notes.isEmpty() || notes.size() == 1){
-                    return notes;
+        if(notes.isEmpty() || notes.size() == 1){
+                return notes;
+        }
+        else{
+            ArrayList<Note> cpy = this.copyNotes();     //Creation d'une copie modifiable de notes
+            ArrayList<Note> ret1 = new ArrayList<>();
+            ArrayList<Note> ret = new ArrayList<>();
+            Note not = null;
+            
+            //Tri par Hauteur
+            for(int j=cpy.size(); 0<j; j-- ){
+                not = cpy.get(0);
+                for(int i=1; i<cpy.size(); i++){
+                    if (cpy.get(i).getName().getNum()< not.getName().getNum())
+                        not = cpy.get(i);
+                }
+                ret1.add(not);
+                cpy.remove(not);
             }
-            else{
-                    ArrayList<Note> copie = notes;
-                    ArrayList<Note> ret = new ArrayList<>();
-                    for(int i=0;i<copie.size();i++){
-                            Note tmp = notes.get(0);
-                            for(int j=1;j<copie.size();j++){
-                                    if(copie.get(j).getInstant() < tmp.getInstant()){
-                                            tmp = copie.get(j);
-                                    }
-                                    if(copie.get(j).getInstant() == tmp.getInstant()){
-                                            if(copie.get(j).getName().getNum() < tmp.getName().getNum()){
-                                                    tmp = copie.get(j);
-                                            }
-                                    }
-                                    else {
-                                            return notes;
-                                    }
-                            }
-                            ret.add(tmp);
-                            copie.remove(tmp);
-                    }
-                    ret.add(copie.get(copie.size()-1));
-                    return ret;
-            }		
+            //Tri par instant
+            for(int j=ret1.size(); 0<j; j-- ){
+                not = ret1.get(0);
+                for(int i=1; i<ret1.size(); i++){
+                    if (ret1.get(i).getInstant()< not.getInstant())
+                        not = ret1.get(i);
+                }
+                ret.add(not);
+                ret1.remove(not);
+            }
+            
+            return ret;   
+        }
     }
+            
+            
+        		
+    
 
 
     public void setInstrument(InstrumentName n){ this.n = n; }
