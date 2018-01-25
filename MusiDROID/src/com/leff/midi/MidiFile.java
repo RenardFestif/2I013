@@ -16,7 +16,7 @@
 
 package com.leff.midi;
 
-import android.util.Log;
+//import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.File;

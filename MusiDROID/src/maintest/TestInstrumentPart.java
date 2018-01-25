@@ -10,11 +10,11 @@ public class TestInstrumentPart {
 		
 		InstrumentPart i1 = new InstrumentPart(InstrumentName.AGOGO, 0);
 		InstrumentPart i2 = new InstrumentPart(InstrumentName.AGOGO, 10);
-		InstrumentPart i3 = new InstrumentPart(InstrumentName.AGOGO, -1);
+		//InstrumentPart i3 = new InstrumentPart(InstrumentName.AGOGO, -1);
 		
 		System.out.println(i1);
 		System.out.println(i2);
-		System.out.println(i3);
+		//System.out.println(i3);
 		
 		i1.setInstrument(InstrumentName.ACCORDION);
 		i1.setOctave(2);
