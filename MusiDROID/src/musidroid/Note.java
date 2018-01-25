@@ -12,19 +12,21 @@ public class Note {
 	
 	public Note(int t, NoteName n, int d){
 		if( t < 0) {
-			try {
-				throw new NegatifException();
+                        try {
+                            throw new NegatifException();
 			} catch (NegatifException e) {
-				e.getMessage();
-				e.printStackTrace();
+                            System.err.println("[Erreur] Instant negatif");
+                            return;
+                            
+				
 			}
 		}
 		if( d <= 0) {
 			try {
 				throw new NegatifOrEqualException();
 			} catch (NegatifOrEqualException e) {
-				e.getMessage();
-				e.printStackTrace();
+                            System.err.println("[Erreur] durée negative ou nulle");
+                            return;
 			}
 		}
 		this.t = t;
