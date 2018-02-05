@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/instrumentLayout"
+tools:context="com.musidroid.InstrumentActivity">
+
+
+    <TextView
+        android:id="@+id/textAddPart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:fontFamily="@font/gloria_hallelujah"
+        android:gravity="start"
+        android:paddingTop="5dp"
+        android:paddingStart="@dimen/fab_margin"
+        android:paddingEnd="@dimen/fab_margin"
+        android:text="Add Part"
+        android:textSize="15sp"
+
+        android:shadowColor="@color/colorLightBlack"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"/>
+
+    <TextView
+        android:id="@+id/textPartOne"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+
+        android:text="Part One"
+        android:textSize="40sp"
+        android:fontFamily="@font/gloria_hallelujah"
+        android:textColor="@color/colorLightBlack"
+
+        android:layout_marginTop="-10sp"/>
+
+    <TextView
+
+        android:id="@+id/textChooseInstru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textPartOne"
+
+        android:text="choisi un instrument"
+        android:gravity="center_horizontal"
+        android:fontFamily="@font/gloria_hallelujah"
+        android:textColor="@color/colorLightBlack"
+        android:textSize="15sp"
+        android:textStyle="bold"
+
+        android:layout_marginTop="-20dp"
+        android:layout_marginBottom="30dp"
+
+        android:layout_alignEnd="@+id/textPartOne"/>
+
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:id="@+id/scrollInstru"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/textChooseInstru"
+
+
+
+
+
+        >
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test1"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test2"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test2"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test2"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test2"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test2"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test2"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test2"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test2"/>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</android.widget.RelativeLayout>

@@ -29,3 +29,5 @@ build.xml
 *.properties
 /MusiDROID/build/
 /MusiDROID/sound/
+/MusiDROID/private/
+/MusiDROID/dist/

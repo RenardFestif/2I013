@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.musidroid.Accueil2"
+    android:id="@+id/Accueil2Layout">
+
+    <Button
+        android:id="@+id/ButtonNewPart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="50"
+        android:fontFamily="@font/gloria_hallelujah"
+        android:onClick="instrumentChooseView"
+        android:text="@string/nouvelle_partition"
+        android:visibility="visible"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/ButtonChargerPart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/charger_une_ancienne_partition"
+        android:fontFamily="@font/gloria_hallelujah"
+        android:visibility="visible"
+        android:layout_weight="50"
+        android:textStyle="bold"/>
+
+
+
+
+
+
+</android.support.v7.widget.LinearLayoutCompat>

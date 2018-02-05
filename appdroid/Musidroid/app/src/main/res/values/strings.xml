@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Musidroid</string>
+    <string name="title_activity_accueil2">Accueil2</string>
+    <string name="title_activity_instrument">InstrumentActivity</string>
+    <string name="textAccueil">MusiDroid</string>
+    <string name="musidroid">MusiDROID</string>
+    <string name="charger_une_ancienne_partition">Charger une ancienne Partition</string>
+    <string name="nouvelle_partition">Nouvelle Partition</string>
+</resources>

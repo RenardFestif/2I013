@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/AccueilLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.musidroid.Accueil">
+
+
+    <TextView
+        android:id="@+id/textAccueil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignBaseline="@+id/buttonAccueil"
+        android:layout_alignBottom="@+id/buttonAccueil"
+        android:layout_alignParentStart="true"
+        android:gravity="bottom|center"
+        android:text="@string/musidroid"
+        android:fontFamily="@font/gloria_hallelujah"
+        android:textColor="@color/colorLightBlack"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:id="@+id/logo_casque"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textAccueil"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@mipmap/casque" />
+
+    <Button
+        android:id="@+id/buttonAccueil"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:alpha="0"
+        android:onClick="nextView"
+        android:visibility="visible" />
+
+
+</android.widget.RelativeLayout>
