@@ -6,4 +6,5 @@
     <string name="musidroid">MusiDROID</string>
     <string name="charger_une_ancienne_partition">Charger une ancienne Partition</string>
     <string name="nouvelle_partition">Nouvelle Partition</string>
+    <string name="back"><![CDATA[<<]]></string>
 </resources>

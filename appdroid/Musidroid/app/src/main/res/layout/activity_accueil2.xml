@@ -9,14 +9,15 @@
 
     <Button
         android:id="@+id/ButtonNewPart"
+        style="@android:style/Widget.DeviceDefault.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="50"
         android:fontFamily="@font/gloria_hallelujah"
         android:onClick="instrumentChooseView"
         android:text="@string/nouvelle_partition"
-        android:visibility="visible"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/ButtonChargerPart"

@@ -28,14 +28,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Accueil" />
         </activity>
-        <activity android:name=".InstrumentActivity"
+        <activity
+            android:name=".InstrumentActivity"
             android:label="@string/title_activity_instrument"
             android:parentActivityName=".Accueil2"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Accueil2"/>
+                android:value=".Accueil2" />
+        </activity>
+
+        <activity android:name=".OctaveActivity"
+            android:parentActivityName=".InstrumentActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".InstrumentActivity"/>
         </activity>
 
         <meta-data

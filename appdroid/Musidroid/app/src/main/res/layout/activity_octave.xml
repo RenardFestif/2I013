@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:orientation="horizontal"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:id="@+id/instrumentLayout"
-tools:context="com.musidroid.InstrumentActivity">
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/octaveLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.musidroid.OctaveActivity">
 
     <TextView
-        android:id="@+id/textAddPart"
+        android:id="@+id/textSetOctave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -19,7 +18,7 @@ tools:context="com.musidroid.InstrumentActivity">
         android:paddingTop="5dp"
         android:paddingStart="@dimen/fab_margin"
         android:paddingEnd="@dimen/fab_margin"
-        android:text="Add Part"
+        android:text="Set Octave"
         android:textSize="15sp"
 
         android:shadowColor="@color/colorLightBlack"
@@ -28,13 +27,13 @@ tools:context="com.musidroid.InstrumentActivity">
         android:shadowRadius="5"/>
 
     <TextView
-        android:id="@+id/textPartOne"
+        android:id="@+id/textPartTwo"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
 
-        android:text="Part One"
+        android:text="Part Two"
         android:textSize="40sp"
         android:fontFamily="@font/gloria_hallelujah"
         android:textColor="@color/colorLightBlack"
@@ -46,9 +45,9 @@ tools:context="com.musidroid.InstrumentActivity">
         android:id="@+id/textChooseInstru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textPartOne"
+        android:layout_below="@+id/textPartTwo"
 
-        android:text="choisis un instrument"
+        android:text="choisis une hauteur"
         android:gravity="center_horizontal"
         android:fontFamily="@font/gloria_hallelujah"
         android:textColor="@color/colorLightBlack"
@@ -58,40 +57,11 @@ tools:context="com.musidroid.InstrumentActivity">
         android:layout_marginTop="-20dp"
         android:layout_marginBottom="30dp"
 
-        android:layout_alignEnd="@+id/textPartOne"/>
+        android:layout_alignEnd="@+id/textPartTwo"/>
 
-
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-
-        android:id="@+id/scrollInstru"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@id/textChooseInstru"
-
-
-
-
-
-        >
-        <LinearLayout
-            android:id="@+id/checkboxLayout"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:gravity="center">
-
-
-
-
-
-        </LinearLayout>
-    </ScrollView>
 
     <Button
-        android:id="@+id/buttonBackPartOne"
+        android:id="@+id/buttonBackPartTwo"
         style="@android:style/Widget.DeviceDefault.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,4 +72,4 @@ tools:context="com.musidroid.InstrumentActivity">
         android:textSize="15sp"
         android:onClick="preView"/>
 
-</android.widget.RelativeLayout>
+</RelativeLayout>

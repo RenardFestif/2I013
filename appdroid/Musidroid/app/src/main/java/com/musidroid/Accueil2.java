@@ -36,7 +36,6 @@ public class Accueil2 extends AppCompatActivity {
 
     public void instrumentChooseView (View view){
         Intent intent = new Intent(this, InstrumentActivity.class);
-        Button editText = (Button) findViewById(R.id.ButtonNewPart);
         startActivity(intent);
     }
 

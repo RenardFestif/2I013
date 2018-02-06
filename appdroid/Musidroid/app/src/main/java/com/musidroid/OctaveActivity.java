@@ -1,25 +1,15 @@
 package com.musidroid;
 
-
-
-import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import android.widget.TextView;
-
-
-
-
-public class Accueil extends AppCompatActivity {
+public class OctaveActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accueil);
-
+        setContentView(R.layout.activity_octave);
 
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -28,14 +18,11 @@ public class Accueil extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
 
-
     }
 
-    public void nextView(View view){
-        Intent intent = new Intent(this, Accueil2.class);
-        startActivity(intent);
 
+    public void preView(View view){
+        this.finish();
     }
-
 
 }
