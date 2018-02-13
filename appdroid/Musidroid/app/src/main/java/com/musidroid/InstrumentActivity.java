@@ -10,13 +10,13 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-
-import l2i013.musidroid.util.*;
-
+import l2i013.musidroid.util.InstrumentName;
 
 
 
 public class InstrumentActivity extends AppCompatActivity implements View.OnClickListener{
+
+    public static final String EXTRA_INSTRU = "com.musidroid.INSTRU";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,6 @@ public class InstrumentActivity extends AppCompatActivity implements View.OnClic
             sv.addView(cb);
             cb.isClickable();
 
-
-
             cb.setOnClickListener(this);
 
 
@@ -59,6 +57,13 @@ public class InstrumentActivity extends AppCompatActivity implements View.OnClic
 
 
         Intent intent = new Intent(this, OctaveActivity.class);
+
+
+        CheckBox cb = (CheckBox) v;
+        String instru = cb.getText().toString();
+        System.out.println(instru);
+        intent.putExtra(EXTRA_INSTRU, instru);
+        cb.setChecked(false);
         startActivity(intent);
 
     }

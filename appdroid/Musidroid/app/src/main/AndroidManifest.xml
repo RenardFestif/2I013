@@ -38,19 +38,43 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Accueil2" />
         </activity>
-
-        <activity android:name=".OctaveActivity"
+        <activity
+            android:name=".OctaveActivity"
             android:parentActivityName=".InstrumentActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".InstrumentActivity"/>
+                android:value=".InstrumentActivity" />
         </activity>
+        <activity
+            android:name=".NameActivity"
+            android:parentActivityName=".OctaveActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".OctaveActivity" />
+        </activity>
+
+        <activity
+            android:name=".TempoActivity"
+            android:screenOrientation="landscape"
+            android:parentActivityName=".Accueil2">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Accueil2" />
+        </activity>
+
+        <activity
+            android:name=".EditionActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"/>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
 
 
     </application>
