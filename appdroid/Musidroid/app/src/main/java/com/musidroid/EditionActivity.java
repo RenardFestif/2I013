@@ -1,6 +1,7 @@
 package com.musidroid;
 
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +15,8 @@ import model.extended.PartitionX;
 
 public class EditionActivity extends AppCompatActivity {
 
-
+    ViewPager viewPager;
+    CustomeSwipe customeSwipe;
 
 
 
@@ -31,10 +33,9 @@ public class EditionActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-
-        ArrayList<String> list = new ArrayList<>();
-        PartitionX p = Global.getPartition();
-
+        viewPager=(ViewPager) findViewById(R.id.CarousselViewPager);
+        customeSwipe = new CustomeSwipe(this);
+        viewPager.setAdapter(customeSwipe);
 
 
 
