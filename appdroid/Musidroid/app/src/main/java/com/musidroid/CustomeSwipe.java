@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import model.Global;
+import model.extended.PartitionX;
+
 /**
  * Created by Jörmungandr on 14/02/2018.
  */
@@ -17,35 +20,48 @@ public class CustomeSwipe extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private String [] test = {"bonjour", "En revoir", "Salut", "Wazaaah"};
+    private ArrayList <String> names = new ArrayList<>();
 
     public CustomeSwipe(Context context){
         this.context = context;
+        nameUpdate();
     }
 
     @Override
     public int getCount() {
-        return test.length;
+        return names.size();
         
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.custom_swipe,container,false);
         TextView textView = (TextView) view.findViewById(R.id.textNamePart);
-        textView.setText(test[position]);
+        textView.setText(names.get(position));
         container.addView(view);
         return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
+         container.removeView((View) object);
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
+
+
+    //Methode pas du tout Optimise Car update a chaque instance
+    public void nameUpdate (){
+        PartitionX partitionX = Global.getPartition();
+
+        for (int i=0; i<partitionX.getSize(); i++){
+            names.add(partitionX.getName(i));
+        }
+    }
+
 }

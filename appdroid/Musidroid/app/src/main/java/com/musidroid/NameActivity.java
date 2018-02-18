@@ -61,8 +61,8 @@ public class NameActivity extends AppCompatActivity{
             }
         }
         System.out.println(instrumentName);
-        p.setName(message);
         p.addPart(instrumentName, octave);
+        p.setName(p.getSize()-1,message);
 
         Global.addPartition(p);
 

@@ -91,10 +91,16 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:contentDescription="Name"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:textAlignment="center" />
+        android:fontFamily="@font/gloria_hallelujah"
+        android:inputType="text|textPersonName"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorLightBlack"
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

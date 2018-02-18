@@ -1,6 +1,8 @@
 package com.musidroid;
 
 import android.content.Intent;
+import android.support.design.widget.TabItem;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,7 +39,32 @@ public class EditionActivity extends AppCompatActivity {
         customeSwipe = new CustomeSwipe(this);
         viewPager.setAdapter(customeSwipe);
 
+        final TabLayout tabLayout =(TabLayout) findViewById(R.id.menuTabLayout);
 
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+
+                    //Position icone + => Add partie
+                    case 1:
+                        onClickAdd(tabLayout);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 
 
