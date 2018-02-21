@@ -39,7 +39,8 @@
                 android:id="@+id/menuTabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="30">
+                android:layout_weight="30"
+                app:tabIndicatorColor="@color/colorLightGrey">
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
@@ -86,18 +87,18 @@
         android:layout_height="match_parent"
         android:layout_weight="75">
 
-        <Button
-            android:id="@+id/buttonPlay"
-            style="@style/Widget.AppCompat.Button.Borderless"
+
+        <ImageButton
+            style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:fontFamily="@font/gloria_hallelujah"
-            android:text="Play"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textStyle="bold|italic"
-            />
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@android:color/transparent"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            app:srcCompat="@mipmap/play" />
 
     </RelativeLayout>
 
@@ -113,8 +114,15 @@
 
 
         </android.support.v4.view.ViewPager>
-    </RelativeLayout>
 
+        <SeekBar
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="65"
+            android:max="10"
+            android:progress="3" />
+    </RelativeLayout>
 
 
 </LinearLayout>
