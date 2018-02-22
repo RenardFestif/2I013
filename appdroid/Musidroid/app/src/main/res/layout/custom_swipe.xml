@@ -15,7 +15,7 @@
         android:shadowDy="5"
         android:shadowRadius="5"
         android:fontFamily="@font/gloria_hallelujah"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
 
 </LinearLayout>

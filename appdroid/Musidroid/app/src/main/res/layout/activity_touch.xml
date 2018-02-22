@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editionLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.musidroid.TouchActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="90"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textDoHaut"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Do"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/textSi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Si"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textLaDiese"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="La#/Si♭"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textLa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="La"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textSolDiese"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Sol#/La♭"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textSol"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Sol"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textFaDiese"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Fa#/Sol♭"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textFa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Fa"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textMi"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Mi"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textReDiese"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Re#/Mi♭"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textRe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Re"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textDoDiese"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Do#/Re♭"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textDoBas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Do"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:textColor="@color/colorLightBlack"
+            android:shadowColor="@color/colorGrey"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10">
+
+        <com.musidroid.TouchBoard
+            android:id="@+id/boardSurface"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

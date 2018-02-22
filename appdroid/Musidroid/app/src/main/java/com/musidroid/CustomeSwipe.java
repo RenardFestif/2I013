@@ -1,6 +1,8 @@
 package com.musidroid;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import model.Global;
 import model.extended.PartitionX;
@@ -34,12 +37,31 @@ public class CustomeSwipe extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(final ViewGroup container, final int position) {
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.custom_swipe,container,false);
-        TextView textView = (TextView) view.findViewById(R.id.textNamePart);
+        final View view = layoutInflater.inflate(R.layout.custom_swipe,container,false);
+        final TextView textView = (TextView) view.findViewById(R.id.textNamePart);
         textView.setText(names.get(position));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(Global.isPartSelected()){
+                    Global.unSelect();
+                    v.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite));
+
+                }
+                else {
+                    Global.setPartSelect(position);
+                    v.setBackgroundColor(ContextCompat.getColor(context, R.color.colorBrokenWhite));
+                }
+
+            }
+        });
+
         container.addView(view);
         return view;
     }
@@ -63,5 +85,6 @@ public class CustomeSwipe extends PagerAdapter {
             names.add(partitionX.getName(i));
         }
     }
+
 
 }

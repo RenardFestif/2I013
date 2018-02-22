@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:name="TheApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -60,7 +61,8 @@
         <activity
             android:name=".TempoActivity"
             android:screenOrientation="landscape"
-            android:parentActivityName=".Accueil2">
+            android:parentActivityName=".Accueil2"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Accueil2" />
@@ -70,6 +72,13 @@
             android:name=".EditionActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"/>
+
+        <activity android:name=".TouchActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme"/>
+
+
+
 
         <meta-data
             android:name="preloaded_fonts"

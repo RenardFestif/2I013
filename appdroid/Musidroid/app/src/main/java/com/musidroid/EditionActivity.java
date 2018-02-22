@@ -1,12 +1,14 @@
 package com.musidroid;
 
 import android.content.Intent;
-import android.support.design.widget.TabItem;
+
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TableLayout;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -39,6 +41,15 @@ public class EditionActivity extends AppCompatActivity {
         customeSwipe = new CustomeSwipe(this);
         viewPager.setAdapter(customeSwipe);
 
+
+
+        //Generation de Partition
+        PartitionX partitionX = Global.getPartition();
+
+
+
+
+        //Menu
         final TabLayout tabLayout =(TabLayout) findViewById(R.id.menuTabLayout);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -50,6 +61,9 @@ public class EditionActivity extends AppCompatActivity {
                     case 1:
                         onClickAdd(tabLayout);
                         break;
+                    case 2:
+                        onClickEdit(tabLayout);
+
                     default:
                         break;
                 }
@@ -62,6 +76,13 @@ public class EditionActivity extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+                    case 2:
+                        onClickEdit(tabLayout);
+                        break;
+                    default:
+                        break;
+                }
 
             }
         });
@@ -83,5 +104,12 @@ public class EditionActivity extends AppCompatActivity {
 
     public void onClickEdit(View view){
 
+
+        Intent intent = new Intent(this, TouchActivity.class);
+        startActivity(intent);
+
     }
+
+
+
 }
