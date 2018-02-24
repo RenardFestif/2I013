@@ -25,5 +25,9 @@ public class Model {
         return xys;
     }
 
+    public Position getPosition (int index){
+        return xys.get(index);
+    }
+
 
 }

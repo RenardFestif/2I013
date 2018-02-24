@@ -6,9 +6,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.SurfaceView;
 import android.view.View;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class EditionActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     CustomeSwipe customeSwipe;
-
+    TheApplication app;
 
 
     @Override
@@ -43,8 +42,11 @@ public class EditionActivity extends AppCompatActivity {
 
 
 
+
+
+
         //Generation de Partition
-        PartitionX partitionX = Global.getPartition();
+        //PartitionX partitionX = Global.getPartition();
 
 
 
@@ -61,8 +63,15 @@ public class EditionActivity extends AppCompatActivity {
                     case 1:
                         onClickAdd(tabLayout);
                         break;
+
+                    // Select une Partie
                     case 2:
                         onClickEdit(tabLayout);
+                        break;
+
+                    case 0:
+                        onClickDelete(tabLayout);
+                        break;
 
                     default:
                         break;
@@ -80,8 +89,12 @@ public class EditionActivity extends AppCompatActivity {
                     case 2:
                         onClickEdit(tabLayout);
                         break;
+                    case 0:
+                        onClickDelete(tabLayout);
+                        break;
                     default:
                         break;
+
                 }
 
             }
@@ -100,16 +113,56 @@ public class EditionActivity extends AppCompatActivity {
 
     public void onClickDelete(View view){
 
+        if (Global.isPartSelected()){
+            int position = Global.partSelect;
+            ArrayList<Model> modelArray = ModelArray.getmodels();
+
+            modelArray.remove(position);
+            PartitionX partitionX = Global.getPartition();
+            partitionX.removePart(position);
+            Intent intent = new Intent(this, EditionActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            System.err.println("Select a Part");
+        }
+
     }
 
     public void onClickEdit(View view){
 
+        if (Global.isPartSelected()){
+            Intent intent = new Intent(this, TouchActivity.class);
+            startActivity(intent);
 
-        Intent intent = new Intent(this, TouchActivity.class);
-        startActivity(intent);
+            //Mdrr je sais meme pas pq ca marche j'ai pas fait exprès
 
+            int position = Global.partSelect;
+            PartitionX partitionX = Global.getPartition();
+            ArrayList<Model> modelArray = ModelArray.getmodels();
+
+            for (int i = 0; i<partitionX.getPartsX().size();i++){
+                Model model = new Model();
+                modelArray.add(model);
+
+            }
+
+
+
+        }
+        else{
+            System.err.println("Select a Part");
+        }
     }
 
+
+    public void onClickPlay(View view){
+        // Charger les notes dans la partition
+
+
+
+    }
 
 
 }

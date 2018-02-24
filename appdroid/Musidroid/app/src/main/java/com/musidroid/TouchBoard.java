@@ -9,16 +9,21 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Switch;
 
 
 import java.util.ArrayList;
 
+import l2i013.musidroid.util.NoteName;
+import model.Global;
+import model.extended.PartitionX;
 
-public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback {
+
+public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
     TheApplication app;
 
-    private static final int longueur = 13;
+    public static final int longueur = 12;
 
 
 
@@ -44,8 +49,15 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void onDraw(Canvas c) {
         SurfaceView view = (SurfaceView) findViewById(R.id.boardSurface);
-        Model m = app.getModel();
+
+        // On cherche le bon model dans l'array
+        int position = Global.partSelect;
+        Model m = app.getModelArray().getModel(position);
+
+
         Paint p = new Paint();
+
+
         float pas = view.getHeight()/longueur;
         int x, y;
         
@@ -73,6 +85,12 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback {
         }
 
 
+        //Mise à jour de la partie Instru
+        updatePart(position,pas);
+        System.out.println("STOP");
+
+
+
     }
 
 
@@ -92,23 +110,116 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();
+
+        int position = Global.partSelect;
         SurfaceView view = (SurfaceView) findViewById(R.id.boardSurface);
         float pas = view.getHeight()/longueur;
         int action = event.getAction();
         switch (action) {
-            case MotionEvent. ACTION_DOWN: {
+
+
+            case MotionEvent.ACTION_DOWN : {
 
                 int caseX = (int) (x/pas);
                 int caseY = (int) (y/pas);
                 int xC = (int) (caseX * pas + pas/2);
                 int yC = (int) (caseY * pas + pas/2);
-                app.getModel().addRemove(xC, yC);
+                app.getModelArray().getModel(position).addRemove(xC, yC);
+
+
                 reDraw();
                 return true;
-            } default:
+
+            }
+
+            default:
                 return false;
         }
     }
 
+    public void updatePart(int position, float pas){
+
+        ArrayList<Model> modelArrayList = ModelArray.getmodels();   //On Recup' tout les models
+        PartitionX partitionX = Global.getPartition();              //Recup' les parties
+        
+
+        for (int i=0; i<modelArrayList.size(); i++) {               // Parcours de tout les models
+            Model model = modelArrayList.get(i);                    // Selection d'un model
+            for (int j = 0; j < model.getArray().size(); j++) {     // Parcours des Positions
+                Position positionsXY = model.getPosition(j);
+                int caseX = (int) (positionsXY.getX()/pas);         //Instant
+                int caseY = (int) (positionsXY.getY()/pas);         //Hauteur
+
+
+                NoteName noteName = null;                           //nom de la note
+
+                switch (caseY){
+                    case 0:
+                        noteName = NoteName.SI;
+                        break;
+                    case 1:
+                        noteName = NoteName.LADIESE;
+                        break;
+                    case 2:
+                        noteName = NoteName.LA;
+                        break;
+                    case 3:
+                        noteName = NoteName.SOLDIESE;
+                        break;
+
+                    case 4:
+                        noteName = NoteName.SOL;
+                        break;
+
+                    case 5:
+                        noteName = NoteName.FADIESE;
+                        break;
+
+                    case 6:
+                        noteName = NoteName.FA;
+                        break;
+
+
+                    case 7 :
+                        noteName = NoteName.MI;
+                        break;
+
+
+                    case 8 :
+                        noteName = NoteName.REDIESE;
+                        break;
+
+                    case 9 :
+                        noteName = NoteName.RE;
+                        break;
+
+                    case 10 :
+                        noteName = NoteName.DODIESE;
+                        break;
+
+                    case 11 :
+                        noteName = NoteName.DO;
+                        break;
+
+                    default:
+                        break;
+                }
+                assert noteName != null;            //On affirme que noteName n'est pas nul
+
+                partitionX.addNote(i,caseX,noteName,1);
+
+            }
+        }
+
+
+        for (int i=0; i<partitionX.getPartsX().size();i++){
+            for (int j=0; j<partitionX.getPart(i).getNotes().size(); j++){
+                System.out.println(partitionX.getPart(i).getNotes().get(j).getName());
+            }
+        }
+
+
+
+    }
 
 }

@@ -15,19 +15,7 @@
         android:layout_weight="90"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textDoHaut"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Do"
-            android:fontFamily="@font/gloria_hallelujah"
-            android:textColor="@color/colorLightBlack"
-            android:shadowColor="@color/colorGrey"
-            android:shadowDx="5"
-            android:shadowDy="5"
-            android:shadowRadius="5"
-            android:gravity="center" />
+
 
         <TextView
             android:id="@+id/textSi"
