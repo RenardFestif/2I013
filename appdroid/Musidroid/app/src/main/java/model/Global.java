@@ -10,9 +10,14 @@ import model.extended.PartitionX;
  * Created by Jörmungandr on 08/02/2018.
  */
 
+
+// Variables Global à l'application
 public class Global {
     public static PartitionX partitions ;
     public static int partSelect = -1;
+
+    /*Dans touch Board = Si le le doigt a glisse*/
+    public static boolean moved = false;
 
 
 
@@ -39,5 +44,11 @@ public class Global {
         return true;
     }
 
+    public static String toXML(){
+        return partitions.toString();
+    }
 
+    // ATTENTION A SUP LE TAMPON
+    public static void reset(){
+    }
 }

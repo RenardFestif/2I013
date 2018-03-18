@@ -1,7 +1,9 @@
 package com.musidroid;
 
+import android.app.Application;
 import android.content.Intent;
 
+import android.media.MediaPlayer;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +12,18 @@ import android.view.SurfaceView;
 import android.view.View;
 
 
+import java.io.File;
 import java.util.ArrayList;
 
+import l2i013.musidroid.util.InstrumentName;
+import l2i013.musidroid.util.MidiFile2I013;
+import l2i013.musidroid.util.NoteName;
 import model.Global;
+import model.extended.InstrumentPartX;
 import model.extended.PartitionX;
+import musidroid.InstrumentPart;
+import musidroid.Note;
+import musidroid.Partition;
 
 
 public class EditionActivity extends AppCompatActivity {
@@ -44,13 +54,6 @@ public class EditionActivity extends AppCompatActivity {
 
 
 
-
-        //Generation de Partition
-        //PartitionX partitionX = Global.getPartition();
-
-
-
-
         //Menu
         final TabLayout tabLayout =(TabLayout) findViewById(R.id.menuTabLayout);
 
@@ -71,6 +74,14 @@ public class EditionActivity extends AppCompatActivity {
 
                     case 0:
                         onClickDelete(tabLayout);
+                        break;
+
+                    case 3:
+                        onClickSetTempo(tabLayout);
+                        break;
+
+                    case 4:
+                        onClickSave(tabLayout);
                         break;
 
                     default:
@@ -157,12 +168,54 @@ public class EditionActivity extends AppCompatActivity {
     }
 
 
-    public void onClickPlay(View view){
-        // Charger les notes dans la partition
+    public void onClickPlay(View view) {
+
+        //Recup de la partition
+        Partition p = Global.getPartition();
+
+
+            TheApplication app = (TheApplication)(this.getApplicationContext());
+            MidiFile2I013.write(new File(app.getFilesDir(), "tmp.mid"), p);
+
+            MediaPlayer mPlayer = new MediaPlayer();
+            MediaPlayer.OnPreparedListener mPrepared =
+                    new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer playerM) {
+                        }
+                    };
+            mPlayer.setOnPreparedListener(mPrepared);
+            try {
+                File f = new File(app.getFilesDir(), "tmp.mid");
+                String path = f.getPath();
+                mPlayer.setDataSource(path);
+                mPlayer.setLooping(false);
+                mPlayer.prepare();
+                if (!mPlayer.isPlaying()) {
+                    mPlayer.start();
+                }
+            } catch (Exception e) {
+            }
+
+        }
+
+
+        public void onClickSetTempo(View view){
+
+        }
+
+        public void onClickSave(View view){
+            Intent intent = new Intent(this, SaveActivity.class);
+            startActivity(intent);
+        }
 
 
 
-    }
+        // Err Fermeture
+        public void onClickExit(View view){
 
-
+            app = (TheApplication) new Application();
+            Intent intent = new Intent(this,Accueil2.class);
+            startActivity(intent);
+        }
 }

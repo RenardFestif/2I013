@@ -16,12 +16,24 @@ import java.util.ArrayList;
 
 import l2i013.musidroid.util.NoteName;
 import model.Global;
+import model.extended.InstrumentPartX;
 import model.extended.PartitionX;
+import musidroid.Note;
 
 
 public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
     TheApplication app;
+
+    //Pour les Action sur la Surface
+    ArrayList<Position> xyStored; //Pour le nom des notes
+    ArrayList<Position> xyStored1; // Pour le dessin
+
+
+    int d; //durée de la note si moved = true
+    int xPrevious;
+    int yPrevious;
+    int radius = 25;
 
     public static final int longueur = 12;
 
@@ -63,6 +75,8 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
         
         c.drawColor(Color.LTGRAY);
         p.setColor(Color.DKGRAY);
+
+        /* Dessin des petits points */
         for (int i = 0; i < view.getWidth(); i+=view.getHeight()/longueur) {
             for(int j = 0; j < view.getWidth(); j+=view.getHeight()/longueur) {
 
@@ -80,14 +94,22 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
 
         for(int i=0;i<xys.size();i++){
-            c.drawCircle(xys.get(i).getX(), xys.get(i).getY(), 25, p);
+            if(xys.get(i).getDurartion() == 1)
+                c.drawCircle(xys.get(i).getX(), xys.get(i).getY(), radius, p);
+            else{
+                // DESSIN D'UN RECT
+                int distance = xys.get(i).getDurartion()*longueur;
+                System.out.println(distance);
+                int xXYS = xys.get(i).getX();
+                int yXYS = xys.get(i).getY();
+                c.drawRoundRect(xXYS-radius, yXYS-radius, xXYS+radius+distance, yXYS+radius, 20,10,p);
+
+            }
+
+
 
         }
 
-
-        //Mise à jour de la partie Instru
-        updatePart(position,pas);
-        System.out.println("STOP");
 
 
 
@@ -119,107 +141,74 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
 
             case MotionEvent.ACTION_DOWN : {
-
-                int caseX = (int) (x/pas);
-                int caseY = (int) (y/pas);
-                int xC = (int) (caseX * pas + pas/2);
-                int yC = (int) (caseY * pas + pas/2);
-                app.getModelArray().getModel(position).addRemove(xC, yC);
-
-
-                reDraw();
+                xPrevious = x;
+                yPrevious = y;
                 return true;
 
             }
+
+            case MotionEvent.ACTION_UP:
+
+
+                int caseX = (int) (x / pas);
+                int caseY = (int) (y / pas);
+                int xC = (int) (caseX * pas + pas / 2);
+                int yC = (int) (caseY * pas + pas / 2);
+
+                if(xPrevious==x && yPrevious==y) {
+
+                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,1);
+                    reDraw();
+
+                }
+                // On affiche les notes quand on releve le doigt
+                else if (Global.moved){
+
+                    Global.moved = false;  //fini de bouger
+                    d = (int)(x/pas)-(int)(xPrevious/pas)+1;     //Durée
+                    caseX = (int)(xPrevious/pas);
+                    caseY = (int)(yPrevious/pas);
+                    xC = (int) (caseX * pas + pas / 2);
+                    yC = (int) (caseY * pas + pas / 2);
+
+                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,d); //Sur le premier temps
+
+                    reDraw();
+
+
+                }
+
+
+
+
+                return true;
+
+
+            case MotionEvent.ACTION_MOVE :
+
+                // ERREUR N'AFFICHE Q'UN SEUL CERCLE
+                if(yPrevious == y) {
+
+                    Global.moved = true;
+                }
+                return true;
+
 
             default:
                 return false;
         }
     }
 
-    public void updatePart(int position, float pas){
 
-        ArrayList<Model> modelArrayList = ModelArray.getmodels();   //On Recup' tout les models
-        PartitionX partitionX = Global.getPartition();              //Recup' les parties
-        
-
-        for (int i=0; i<modelArrayList.size(); i++) {               // Parcours de tout les models
-            Model model = modelArrayList.get(i);                    // Selection d'un model
-            for (int j = 0; j < model.getArray().size(); j++) {     // Parcours des Positions
-                Position positionsXY = model.getPosition(j);
-                int caseX = (int) (positionsXY.getX()/pas);         //Instant
-                int caseY = (int) (positionsXY.getY()/pas);         //Hauteur
-
-
-                NoteName noteName = null;                           //nom de la note
-
-                switch (caseY){
-                    case 0:
-                        noteName = NoteName.SI;
-                        break;
-                    case 1:
-                        noteName = NoteName.LADIESE;
-                        break;
-                    case 2:
-                        noteName = NoteName.LA;
-                        break;
-                    case 3:
-                        noteName = NoteName.SOLDIESE;
-                        break;
-
-                    case 4:
-                        noteName = NoteName.SOL;
-                        break;
-
-                    case 5:
-                        noteName = NoteName.FADIESE;
-                        break;
-
-                    case 6:
-                        noteName = NoteName.FA;
-                        break;
-
-
-                    case 7 :
-                        noteName = NoteName.MI;
-                        break;
-
-
-                    case 8 :
-                        noteName = NoteName.REDIESE;
-                        break;
-
-                    case 9 :
-                        noteName = NoteName.RE;
-                        break;
-
-                    case 10 :
-                        noteName = NoteName.DODIESE;
-                        break;
-
-                    case 11 :
-                        noteName = NoteName.DO;
-                        break;
-
-                    default:
-                        break;
-                }
-                assert noteName != null;            //On affirme que noteName n'est pas nul
-
-                partitionX.addNote(i,caseX,noteName,1);
-
-            }
+    public boolean noteExist(InstrumentPartX instru, Note note){
+        ArrayList<Note> notes = instru.getNotes();
+        for(int i=0;i<notes.size();i++){
+            Note n = notes.get(i);
+            if(n.getInstant()==note.getInstant() && n.getName()==note.getName())
+                return true;
         }
-
-
-        for (int i=0; i<partitionX.getPartsX().size();i++){
-            for (int j=0; j<partitionX.getPart(i).getNotes().size(); j++){
-                System.out.println(partitionX.getPart(i).getNotes().get(j).getName());
-            }
-        }
-
-
-
+        return false;
     }
+
 
 }

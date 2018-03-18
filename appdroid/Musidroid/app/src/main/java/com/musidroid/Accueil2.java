@@ -31,4 +31,8 @@ public class Accueil2 extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickCharger (View view){
+        System.out.println(fileList());
+    }
+
 }

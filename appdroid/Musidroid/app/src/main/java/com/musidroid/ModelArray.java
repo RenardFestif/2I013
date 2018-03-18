@@ -4,9 +4,6 @@ import com.musidroid.Model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Jörmungandr on 23/02/2018.
- */
 
 public class ModelArray {
     private static ArrayList<Model> models;
@@ -25,5 +22,13 @@ public class ModelArray {
 
     public void addModel (Model model){
         models.add(model);
+    }
+
+    public void reset(){
+        for (int i=0;i<models.size(); i++) {
+            models.get(i).reset();
+        }
+
+        //models.clear();
     }
 }
