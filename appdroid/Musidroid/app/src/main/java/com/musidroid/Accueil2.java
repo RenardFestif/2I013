@@ -32,7 +32,9 @@ public class Accueil2 extends AppCompatActivity {
     }
 
     public void onClickCharger (View view){
-        System.out.println(fileList());
+        Intent intent = new Intent(this, ChargerActivity.class);
+        startActivity(intent);
+        ;
     }
 
 }

@@ -15,6 +15,6 @@ public class NoteX extends Note {
 
     @Override
     public String toString() {
-        return "<Note instant="+super.getInstant()+" name="+super.getName()+" duree="+super.getDuration()+" />";
+        return "<Note instant=\""+super.getInstant()+"\" name=\""+super.getName()+"\" duree=\""+super.getDuration()+"\" />";
     }
 }

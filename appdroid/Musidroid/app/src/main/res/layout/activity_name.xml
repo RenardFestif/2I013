@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:contentDescription="Name"
+        android:hint="Name"
         android:ems="10"
         android:fontFamily="@font/gloria_hallelujah"
         android:inputType="text|textPersonName"

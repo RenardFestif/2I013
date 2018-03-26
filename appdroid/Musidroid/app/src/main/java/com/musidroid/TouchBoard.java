@@ -98,11 +98,13 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
                 c.drawCircle(xys.get(i).getX(), xys.get(i).getY(), radius, p);
             else{
                 // DESSIN D'UN RECT
-                int distance = xys.get(i).getDurartion()*longueur;
-                System.out.println(distance);
+                int d = (xys.get(i).getDurartion());
                 int xXYS = xys.get(i).getX();
+                int caseXXYS = (int)(xXYS/pas);
+                int xf = d+caseXXYS-1;
+                int coordXF = (int)(xf*pas+pas/2);
                 int yXYS = xys.get(i).getY();
-                c.drawRoundRect(xXYS-radius, yXYS-radius, xXYS+radius+distance, yXYS+radius, 20,10,p);
+                c.drawRoundRect(xXYS-radius, yXYS-radius, coordXF+radius, yXYS+radius, 20,20,p);
 
             }
 
@@ -166,6 +168,7 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
                     Global.moved = false;  //fini de bouger
                     d = (int)(x/pas)-(int)(xPrevious/pas)+1;     //Durée
+                    System.out.println(d);
                     caseX = (int)(xPrevious/pas);
                     caseY = (int)(yPrevious/pas);
                     xC = (int) (caseX * pas + pas / 2);
@@ -186,8 +189,8 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
             case MotionEvent.ACTION_MOVE :
 
-                // ERREUR N'AFFICHE Q'UN SEUL CERCLE
-                if(yPrevious == y) {
+
+                if(yPrevious == y && x > xPrevious) {
 
                     Global.moved = true;
                 }

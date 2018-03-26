@@ -30,6 +30,7 @@ public class PartitionX extends Partition{
         return getSize()-1;
     }
 
+
     @Override
     public void addNote(int i, int t, NoteName n, int d) {
         super.addNote(i, t, n, d);
@@ -80,7 +81,7 @@ public class PartitionX extends Partition{
 
     @Override
     public String toString() {
-        String s = "<Partition tempo="+super.getTempo();
+        String s = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<Partition tempo=\""+super.getTempo()+"\">";
         ArrayList<InstrumentPartX> instrumentPartXArrayList = Global.getPartition().getPartsX();
         InstrumentPartX instrumentPartX = null;
         for(int i=0;i<instrumentPartXArrayList.size();i++) {
@@ -88,7 +89,7 @@ public class PartitionX extends Partition{
             s += "\n\t" + instrumentPartX.toString();
         }
 
-        s+="\n/>";
+        s+="\n</Partition>";
         return s;
     }
 }

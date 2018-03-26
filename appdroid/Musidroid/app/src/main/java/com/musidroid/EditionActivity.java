@@ -214,8 +214,7 @@ public class EditionActivity extends AppCompatActivity {
         // Err Fermeture
         public void onClickExit(View view){
 
-            app = (TheApplication) new Application();
-            Intent intent = new Intent(this,Accueil2.class);
-            startActivity(intent);
+            finish();
+
         }
 }

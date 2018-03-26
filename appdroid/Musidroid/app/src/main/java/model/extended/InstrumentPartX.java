@@ -39,7 +39,7 @@ public class InstrumentPartX extends InstrumentPart {
 
     @Override
     public String toString() {
-        String s = "<InstrumentPart Name="+this.getName()+" Octave="+super.getOctave()+" Instrument="+super.getInstrument();
+        String s = "<InstrumentPart Name=\""+this.getName()+"\" Octave=\""+super.getOctave()+"\" Instrument=\""+super.getInstrument()+"\">";
        ArrayList<Note> notes = (ArrayList<Note>) (this.getNotes());
        NoteX notex = null;
        Note note = null;
@@ -48,7 +48,7 @@ public class InstrumentPartX extends InstrumentPart {
            notex = new NoteX(note.getInstant(), note.getName(),note.getDuration());
            s+= "\n\t\t"+notex.toString();
        }
-        s+="\n\t/>";
+        s+="\n\t</InstrumentPart>";
         return s;
     }
 }

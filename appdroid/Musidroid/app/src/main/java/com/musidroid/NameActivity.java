@@ -68,6 +68,8 @@ public class NameActivity extends AppCompatActivity{
 
         Intent intent = new Intent(this, EditionActivity.class);
         startActivity(intent);
+
+        finish();
     }
 
 }

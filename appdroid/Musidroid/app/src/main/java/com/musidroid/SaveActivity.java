@@ -48,7 +48,6 @@ public class SaveActivity extends AppCompatActivity {
         try {
             oc = openFileOutput(namePartition+".xml", Context.MODE_PRIVATE);
             oc.write(xmlText.getBytes());
-            System.out.println(getFilesDir());
             oc.close();
         }
         catch (FileNotFoundException e) {
@@ -58,9 +57,7 @@ public class SaveActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String[] files = fileList();
-        System.out.println(files.length);
-        System.out.println(files[5]);
+        System.out.println(xmlText);
         finish();
 
     }
@@ -68,4 +65,6 @@ public class SaveActivity extends AppCompatActivity {
     public void onClickAbord (View view){
         finish();
     }
+
+
 }
