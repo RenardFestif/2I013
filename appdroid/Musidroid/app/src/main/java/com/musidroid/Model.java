@@ -15,7 +15,13 @@ public class Model {
         xys = new ArrayList<Position>();
     }
 
-    public void addRemove(int x, int y, int caseX, int caseY, int d) {
+     /*----------------------*/
+      /*----------------------*/
+       /*----------------------*/
+        /*----------------------*/
+         /*----------------------*/
+
+    public void addRemove(int x, int y, int caseX, int caseY, int d, int offset) {
 
 
         PartitionX partitionX = Global.getPartition();
@@ -94,9 +100,6 @@ public class Model {
         return xys;
     }
 
-    public Position getPosition (int index){
-        return xys.get(index);
-    }
 
     public void reset(){
         xys.clear();

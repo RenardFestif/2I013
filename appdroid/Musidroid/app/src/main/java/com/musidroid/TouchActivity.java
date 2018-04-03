@@ -3,11 +3,15 @@ package com.musidroid;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class TouchActivity extends AppCompatActivity {
 
     TheApplication app;
+
+    static Integer page = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +26,34 @@ public class TouchActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
+        TextView tv = findViewById(R.id.numeroPage);
+        tv.setText(page.toString());
+
     }
 
+    public void onClickExitSU(View view){
+        finish();
+    }
+
+    public void onClickPreviewSU(View view){
+        if(page == 1){
+            return;
+        }
+        else{
+            page--;
+            TextView tv = findViewById(R.id.numeroPage);
+            tv.setText(page.toString());
+            recreate();
+        }
+    }
+
+    public void onClickNextSU(View view){
+
+        page++;
+        TextView tv = findViewById(R.id.numeroPage);
+        tv.setText(page.toString());
+        recreate();
+    }
 
 
 

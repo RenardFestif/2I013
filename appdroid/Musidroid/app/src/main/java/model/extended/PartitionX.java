@@ -59,11 +59,9 @@ public class PartitionX extends Partition{
     }
 
 
-    public void resetPartsNote(){
-        for (int i=0; i<this.getPartsX().size(); i++){
-            InstrumentPart part = this.getPart(i);
-            part.getNotes().clear();
-        }
+    public void addPartX(InstrumentPartX instrumentPartX){
+        super.addPart(instrumentPartX.getInstrument(), instrumentPartX.getOctave());
+        this.instrumentPartX.add(instrumentPartX);
     }
 
     public ArrayList<InstrumentPartX> getPartsX() {

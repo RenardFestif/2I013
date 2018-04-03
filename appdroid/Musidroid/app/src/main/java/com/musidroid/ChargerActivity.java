@@ -1,8 +1,5 @@
 package com.musidroid;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,13 +15,18 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.*;
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
-import java.io.FileInputStream;
 import model.extended.PartitionX;
+import l2i013.musidroid.util.InstrumentName;
+import l2i013.musidroid.util.NoteName;
+import model.extended.InstrumentPartX;
+import model.Global;
+import android.content.Intent;
+
+
+
 
 public class ChargerActivity extends AppCompatActivity {
 
@@ -106,21 +108,13 @@ public class ChargerActivity extends AppCompatActivity {
 
                         Document document = readXML(fileDir);
                         loadPartition(document);
-
                     }
                 });
                 /*Fin Traitement bouton charger*/
-
                 dialog.show();
-
-
             }
-
         });
-
-
     }
-
 
     public Document readXML(String fname) {
 
@@ -147,17 +141,67 @@ public class ChargerActivity extends AppCompatActivity {
 
         PartitionX partitionX = new PartitionX(Integer.parseInt(racine.getAttribute("tempo"))); //Nouvelle Partition
 
+        /**PARCOURS DES INSTRUMENTPART**/
         for (int i = 0; i<racineNoeuds.getLength(); i++) {
-            if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                final Node instrumentPart = racineNoeuds.item(i);
+            if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {       //On test si le noeud est bien un noeud et non un commentaire
+                Element instrumentPart = (Element)racineNoeuds.item(i);   //Element InstrumentPart
 
-                NamedNodeMap instrumentPartAttributes =instrumentPart.getAttributes();
+                /** DEBUG **/
+                System.out.println(instrumentPart.getNodeName());
+                System.out.println(instrumentPart.getAttribute("Octave"));
+                System.out.println(instrumentPart.getAttribute("Name"));
+                System.out.println(instrumentPart.getAttribute("Instrument"));
+                /**DEBUG**/
+
+                String instru = instrumentPart.getAttribute("Instrument");  //Nom de l'instrument (String) il faut le convertir
+                InstrumentName instrumentName = InstrumentName.valueOf(instru);     //String convertie en Instrument Name
+
+                InstrumentPartX instrumentPartX= new InstrumentPartX(instrumentName,Integer.parseInt(instrumentPart.getAttribute("Octave")));
+                instrumentPartX.setName(instrumentPart.getAttribute("Name"));
+
+
+               // partitionX.addPart(instrumentName, Integer.parseInt(instrumentPart.getAttribute("Octave")));    //Partition ajouté
+               // //partitionX.setName(i,instrumentPart.getAttribute("Name") );                                     //Nom de la partition mis a jour
+
+                NodeList noeudNotes = instrumentPart.getElementsByTagName("Note");     //Noeud des Notes
+
+                /**PARCOURS DES NOTES POUR CHAQUES INSTRUMENT PART**/
+                for (int j = 0; j<noeudNotes.getLength(); j++){
+                    if(noeudNotes.item(j).getNodeType() == Node.ELEMENT_NODE){
+
+                        Element note = (Element) noeudNotes.item(i);      //Element note
+
+                        /** DEBUG **/
+
+                        System.out.println(note.getAttribute("instant"));
+                        System.out.println(note.getAttribute("name"));
+                        System.out.println(note.getAttribute("duree"));
+                        /**DEBUG**/
+
+                        NoteName noteName = NoteName.valueOf(note.getAttribute("name").replace("#", "DIESE"));  //Le replace permet de correler avec l'enum de NotName
+                        instrumentPartX.addNote(Integer.parseInt(note.getAttribute("instant")),noteName, Integer.parseInt(note.getAttribute("duree")));
+                       // partitionX.addNote(i,Integer.parseInt(note.getAttribute("instant")),noteName, Integer.parseInt(note.getAttribute("duree")));    //erreur sur le i
+
+                    }
+                }
+
+                partitionX.addPartX(instrumentPartX);
+
+
+
+
 
 
             }
         }
 
-        System.out.println(partitionX.getTempo());
+        Global.addPartition(partitionX);
+        Global.partSelect = -1;
+
+        Intent intent = new Intent(this, EditionActivity.class);
+        startActivity(intent);
+        finish();
+
 
     }
 

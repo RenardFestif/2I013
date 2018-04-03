@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.Switch;
 
 
@@ -24,6 +25,8 @@ import musidroid.Note;
 public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
     TheApplication app;
+
+    Integer offset = TouchActivity.page;
 
     //Pour les Action sur la Surface
     ArrayList<Position> xyStored; //Pour le nom des notes
@@ -72,7 +75,7 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
         float pas = view.getHeight()/longueur;
         int x, y;
-        
+
         c.drawColor(Color.LTGRAY);
         p.setColor(Color.DKGRAY);
 
@@ -84,35 +87,35 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
                 y = (int) (j/pas);
                 int xC = (int) (x * pas + pas/2);
                 int yC = (int) (y * pas + pas/2);
-            c.drawCircle(xC,yC, 5, p);
+                c.drawCircle(xC,yC, 5, p);
             }
 
         }
-
 
         ArrayList<Position> xys = m.getArray();
 
 
-        for(int i=0;i<xys.size();i++){
-            if(xys.get(i).getDurartion() == 1)
-                c.drawCircle(xys.get(i).getX(), xys.get(i).getY(), radius, p);
-            else{
-                // DESSIN D'UN RECT
-                int d = (xys.get(i).getDurartion());
-                int xXYS = xys.get(i).getX();
-                int caseXXYS = (int)(xXYS/pas);
-                int xf = d+caseXXYS-1;
-                int coordXF = (int)(xf*pas+pas/2);
-                int yXYS = xys.get(i).getY();
-                c.drawRoundRect(xXYS-radius, yXYS-radius, coordXF+radius, yXYS+radius, 20,20,p);
+        for (int i = 0; i < xys.size(); i++) {
 
+          /**/  int instant = (int)(xys.get(i).getX()/pas);
+
+          /**/  if(estDansPage(instant,view)) {
+                if (xys.get(i).getDurartion() == 1)
+                    c.drawCircle(xys.get(i).getX(), xys.get(i).getY(), radius, p);
+                else {
+                    // DESSIN D'UN RECT
+                    int d = (xys.get(i).getDurartion());
+                    int xXYS = xys.get(i).getX();
+                    int caseXXYS = (int) (xXYS / pas);
+                    int xf = d + caseXXYS - 1;
+                    int coordXF = (int) (xf * pas + pas / 2);
+                    int yXYS = xys.get(i).getY();
+                    c.drawRoundRect(xXYS - radius, yXYS - radius, coordXF + radius, yXYS + radius, 20, 20, p);
+
+                }
             }
 
-
-
         }
-
-
 
 
     }
@@ -159,7 +162,7 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
                 if(xPrevious==x && yPrevious==y) {
 
-                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,1);
+                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,1,(offset-1)*(view.getHeight() ));
                     reDraw();
 
                 }
@@ -174,7 +177,7 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
                     xC = (int) (caseX * pas + pas / 2);
                     yC = (int) (caseY * pas + pas / 2);
 
-                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,d); //Sur le premier temps
+                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,d, (offset-1)*(view.getHeight())); //Sur le premier temps
 
                     reDraw();
 
@@ -212,6 +215,16 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
         }
         return false;
     }
+
+    public boolean estDansPage(int instant, View view){
+        float pas = view.getHeight()/longueur;
+        if((offset*(view.getHeight()/pas)>instant)&&(instant<(offset+1)*(view.getHeight()/pas))){
+            return true;
+        }
+        return false;
+    }
+
+
 
 
 }
