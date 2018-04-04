@@ -65,6 +65,9 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
     public void onDraw(Canvas c) {
         SurfaceView view = (SurfaceView) findViewById(R.id.boardSurface);
 
+        //Test si nouvelle partiton
+        syncModelPart();
+
         // On cherche le bon model dans l'array
         int position = Global.partSelect;
         Model m = app.getModelArray().getModel(position);
@@ -224,7 +227,28 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
         return false;
     }
 
+    public boolean isPartitionEmpty (PartitionX partitionX){
+        if(partitionX.getSize()==0){
+            return true;
+        }
+        else
+            return false;
+    }
 
+
+    public void syncModelPart(){
+        PartitionX partitionX = Global.getPartition();
+
+        if(isPartitionEmpty(partitionX)){
+            //Clean du model
+            ModelArray modelArray = app.modelArray;
+            for (int i=0; i<modelArray.getModels().size(); i++){
+                Model model = modelArray.getModel(i);
+                model.reset();
+            }
+        }
+        // else rien
+    }
 
 
 }

@@ -10,7 +10,7 @@ import musidroid.Partition;
 
 
 public class PartitionX extends Partition{
-    private ArrayList<InstrumentPartX> instrumentPartX;
+    public ArrayList<InstrumentPartX> instrumentPartX;
 
 
     public PartitionX (int t){
@@ -90,4 +90,11 @@ public class PartitionX extends Partition{
         s+="\n</Partition>";
         return s;
     }
+
+
+   //// /!\ reset les partitions
+   //public void clear(){
+   //    super.getParts().clear();
+   //    instrumentPartX.clear();
+   //}
 }

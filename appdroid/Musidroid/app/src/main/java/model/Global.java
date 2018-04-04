@@ -50,5 +50,6 @@ public class Global {
 
     // ATTENTION A SUP LE TAMPON
     public static void reset(){
+        partitions = null;
     }
 }
