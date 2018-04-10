@@ -2,9 +2,17 @@ package com.musidroid;
 
 public class Position {
     int x, y;
+    int duration;
     Position(int x, int y) { this.x = x; this.y = y; }
+    Position(int x, int y, int duration){
+        this(x,y);
+        this.duration = duration;
+    }
+
+
     public Integer getX() { return x; }
     public Integer getY() { return y; }
+    public int getDurartion(){ return duration; }
 
 
     public boolean equals(Object obj){
@@ -16,6 +24,10 @@ public class Position {
             if(tmp.getY()==this.getY())
                 return true;
         return false;
+    }
+
+    public String toString(){
+        return "X ="+getX()+"\t Y="+getY();
     }
 
 }

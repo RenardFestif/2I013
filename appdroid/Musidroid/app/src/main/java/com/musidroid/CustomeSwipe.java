@@ -15,9 +15,6 @@ import java.util.ResourceBundle;
 import model.Global;
 import model.extended.PartitionX;
 
-/**
- * Created by Jörmungandr on 14/02/2018.
- */
 
 public class CustomeSwipe extends PagerAdapter {
 
@@ -43,21 +40,25 @@ public class CustomeSwipe extends PagerAdapter {
         final View view = layoutInflater.inflate(R.layout.custom_swipe,container,false);
         final TextView textView = (TextView) view.findViewById(R.id.textNamePart);
         textView.setText(names.get(position));
+        textView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite));
 
+        //Selection partie Menu Slide
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                if(Global.isPartSelected()){
+                if(Global.isPartSelected() && Global.partSelect != position){
+                    Global.setPartSelect(position);
+                }
+                else if(Global.isPartSelected() &&  Global.partSelect == position){
                     Global.unSelect();
-                    v.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite));
-
                 }
                 else {
                     Global.setPartSelect(position);
-                    v.setBackgroundColor(ContextCompat.getColor(context, R.color.colorBrokenWhite));
+
                 }
+
 
             }
         });

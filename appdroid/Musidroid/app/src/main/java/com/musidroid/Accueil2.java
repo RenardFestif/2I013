@@ -31,4 +31,10 @@ public class Accueil2 extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickCharger (View view){
+        Intent intent = new Intent(this, ChargerActivity.class);
+        startActivity(intent);
+        ;
+    }
+
 }

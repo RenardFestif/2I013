@@ -27,7 +27,8 @@
         android:fontFamily="@font/gloria_hallelujah"
         android:visibility="visible"
         android:layout_weight="50"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:onClick="onClickCharger"/>
 
 
 

@@ -2,15 +2,25 @@ package com.musidroid;
 
 import android.app.Application;
 
-import com.musidroid.Model;
+import model.Global;
 
 public class TheApplication extends Application {
-    Model m;
+
+    ModelArray modelArray;
     @Override
     public void onCreate() {
         super.onCreate();
-        m = new Model();
+        modelArray = new ModelArray();
+
     }
-    public Model getModel() {
-        return m;
-    } }
+
+    public ModelArray getModelArray(){return modelArray;}
+
+    // ATTENTION SUPPRIME LE MODEL
+    public void reset(){
+        modelArray.reset();
+    }
+
+
+
+}

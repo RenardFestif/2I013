@@ -31,6 +31,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:fontFamily="@font/gloria_hallelujah"
+                android:layout_marginEnd="3dp"
 
                 android:text="@string/chevronOuvrant" />
 
@@ -39,24 +40,37 @@
                 android:id="@+id/menuTabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="30">
+                android:layout_weight="30"
+                app:tabIndicatorColor="@color/colorGrey"
+                app:tabMode="scrollable">
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="L" />
+                    android:text="Delete" />
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
-                    android:icon="@android:drawable/ic_menu_add"
-                    android:onClick="onClickAdd" />
+                    android:onClick="onClickAdd"
+                    android:text="Add" />
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Edit" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set Tempo" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save" />
+
             </android.support.design.widget.TabLayout>
 
             <TextView
@@ -67,6 +81,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:fontFamily="@font/gloria_hallelujah"
+                android:layout_marginStart="3dp"
 
                 android:text=">" />
 
@@ -86,21 +101,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="75">
+        android:layout_weight="70">
 
 
         <ImageButton
+            android:id="@+id/imageButton"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:adjustViewBounds="true"
+            android:background="@drawable/ic_launcher_background"
             android:backgroundTint="@android:color/transparent"
             android:cropToPadding="false"
+            android:onClick="onClickPlay"
             android:scaleType="fitCenter"
-            app:srcCompat="@mipmap/play"
-            android:id="@+id/imageButton" />
+            app:srcCompat="@android:drawable/ic_media_play" />
 
     </RelativeLayout>
 
@@ -109,22 +126,30 @@
         android:layout_height="match_parent"
         android:layout_weight="50">
 
+
         <android.support.v4.view.ViewPager
+            android:id="@+id/CarousselViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/CarousselViewPager">
+            android:layout_alignParentTop="true"
+            >
 
 
         </android.support.v4.view.ViewPager>
 
-        <SeekBar
-            style="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="65"
-            android:max="10"
-            android:progress="3" />
+
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/gloria_hallelujah"
+        android:text="Exit"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:onClick="onClickExit"/>
 
 </LinearLayout>

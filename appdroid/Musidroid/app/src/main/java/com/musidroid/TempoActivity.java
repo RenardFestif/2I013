@@ -55,6 +55,8 @@ public class TempoActivity extends AppCompatActivity {
         Intent intentNext = new Intent(this, InstrumentActivity.class);
         startActivity(intentNext);
 
+        finish();
+
 
     }
 
