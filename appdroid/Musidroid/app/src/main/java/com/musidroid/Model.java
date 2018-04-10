@@ -15,13 +15,7 @@ public class Model {
         xys = new ArrayList<Position>();
     }
 
-     /*----------------------*/
-      /*----------------------*/
-       /*----------------------*/
-        /*----------------------*/
-         /*----------------------*/
-
-    public void addRemove(int x, int y, int caseX, int caseY, int d, int offset) {
+    public void addRemove(int x, int y, int caseX, int caseY, int d, int offset, float pas) {
 
 
         PartitionX partitionX = Global.getPartition();
@@ -83,15 +77,17 @@ public class Model {
         assert noteName != null;
 
         for(int i=0;i<xys.size();i++){
-            if(xys.get(i).getX()==x && xys.get(i).getY()==y) {
+            if(xys.get(i).getX()+offset*pas==x && xys.get(i).getY()==y) {
                 xys.remove(i);
-                partitionX.removeNote(position,caseX, noteName);
+                partitionX.removeNote(position,caseX+offset, noteName);
 
                 return;
             }
         }
-        xys.add(new Position(x,y,d));
-        partitionX.addNote(position, caseX, noteName, d);
+        xys.add(new Position(x+(int)(offset*pas),y,d));
+        partitionX.addNote(position, caseX+offset, noteName, d);
+        System.out.println("Offset "+offset);
+        System.out.println(caseX+offset);
 
     }
 

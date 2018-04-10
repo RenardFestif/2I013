@@ -6,7 +6,7 @@ import model.Global;
 
 public class TheApplication extends Application {
 
-    public ModelArray modelArray;
+    ModelArray modelArray;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -17,10 +17,8 @@ public class TheApplication extends Application {
     public ModelArray getModelArray(){return modelArray;}
 
     // ATTENTION SUPPRIME LE MODEL
-
-
-    public void newModel (){
-        modelArray = new ModelArray();
+    public void reset(){
+        modelArray.reset();
     }
 
 

@@ -10,7 +10,7 @@ import musidroid.Partition;
 
 
 public class PartitionX extends Partition{
-    public ArrayList<InstrumentPartX> instrumentPartX;
+    private ArrayList<InstrumentPartX> instrumentPartX;
 
 
     public PartitionX (int t){
@@ -59,9 +59,11 @@ public class PartitionX extends Partition{
     }
 
 
-    public void addPartX(InstrumentPartX instrumentPartX){
-        super.addPart(instrumentPartX.getInstrument(), instrumentPartX.getOctave());
-        this.instrumentPartX.add(instrumentPartX);
+    public void resetPartsNote(){
+        for (int i=0; i<this.getPartsX().size(); i++){
+            InstrumentPart part = this.getPart(i);
+            part.getNotes().clear();
+        }
     }
 
     public ArrayList<InstrumentPartX> getPartsX() {
@@ -90,11 +92,4 @@ public class PartitionX extends Partition{
         s+="\n</Partition>";
         return s;
     }
-
-
-   //// /!\ reset les partitions
-   //public void clear(){
-   //    super.getParts().clear();
-   //    instrumentPartX.clear();
-   //}
 }

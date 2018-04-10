@@ -19,7 +19,11 @@ public class Global {
     /*Dans touch Board = Si le le doigt a glisse*/
     public static boolean moved = false;
 
+    /*Coefficient de deplacement pour la seekbar */
+    public static int coeffdep = 4;
 
+    /*OffSet en terme de d'instant*/
+    public static int offset;
 
 
     public static void addPartition(PartitionX p){
@@ -48,8 +52,4 @@ public class Global {
         return partitions.toString();
     }
 
-    // ATTENTION A SUP LE TAMPON
-    public static void reset(){
-        partitions = null;
-    }
 }

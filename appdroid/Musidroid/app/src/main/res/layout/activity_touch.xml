@@ -213,33 +213,18 @@
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:text="Exit"
             android:onClick="onClickExitSU"/>
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
+        <SeekBar
+            android:id="@+id/seekScroll"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Preview"
-            android:onClick="onClickPreviewSU"/>
-
-        <TextView
-            android:id="@+id/numeroPage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Next"
-            android:onClick="onClickNextSU"/>
+            android:layout_weight="90"
+            />
 
     </LinearLayout>
 

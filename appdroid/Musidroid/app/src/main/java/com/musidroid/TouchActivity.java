@@ -1,16 +1,21 @@
 package com.musidroid;
 
+import android.content.Context;
+import android.graphics.Canvas;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.SurfaceView;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
+import model.Global;
 
 
 public class TouchActivity extends AppCompatActivity {
 
     TheApplication app;
 
-    static Integer page = 1;
 
 
     @Override
@@ -26,35 +31,39 @@ public class TouchActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
-        TextView tv = findViewById(R.id.numeroPage);
-        tv.setText(page.toString());
+        SeekBar sk = (SeekBar) findViewById(R.id.seekScroll);
+
+        sk.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                Global.offset = i*Global.coeffdep;
+
+                ((TouchBoard)findViewById(R.id.boardSurface)).reDraw();
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                System.out.println(Global.offset);
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+
 
     }
 
+
+    // Offset non remis a 0
     public void onClickExitSU(View view){
+        Global.offset = 0;
         finish();
+        System.out.println(Global.offset);
     }
-
-    public void onClickPreviewSU(View view){
-        if(page == 1){
-            return;
-        }
-        else{
-            page--;
-            TextView tv = findViewById(R.id.numeroPage);
-            tv.setText(page.toString());
-            recreate();
-        }
-    }
-
-    public void onClickNextSU(View view){
-
-        page++;
-        TextView tv = findViewById(R.id.numeroPage);
-        tv.setText(page.toString());
-        recreate();
-    }
-
 
 
 

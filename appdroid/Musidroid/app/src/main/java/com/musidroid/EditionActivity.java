@@ -113,15 +113,12 @@ public class EditionActivity extends AppCompatActivity {
 
 
 
-        /*Synchroniser le model et la partiton*/
-
-
     }
 
     public void onClickAdd(View view){
-        finish();
         Intent intent = new Intent(this, InstrumentActivity.class);
         startActivity(intent);
+        finish();
 
 
     }
@@ -215,9 +212,8 @@ public class EditionActivity extends AppCompatActivity {
 
 
 
-
+        // Err Fermeture
         public void onClickExit(View view){
-            Global.reset();
 
             finish();
 

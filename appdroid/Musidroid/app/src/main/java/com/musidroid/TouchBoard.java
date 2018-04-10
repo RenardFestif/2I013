@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.Switch;
 
 
@@ -26,7 +27,8 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
     TheApplication app;
 
-    Integer offset = TouchActivity.page;
+
+
 
     //Pour les Action sur la Surface
     ArrayList<Position> xyStored; //Pour le nom des notes
@@ -65,9 +67,6 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
     public void onDraw(Canvas c) {
         SurfaceView view = (SurfaceView) findViewById(R.id.boardSurface);
 
-        //Test si nouvelle partiton
-        syncModelPart();
-
         // On cherche le bon model dans l'array
         int position = Global.partSelect;
         Model m = app.getModelArray().getModel(position);
@@ -77,6 +76,7 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
 
         float pas = view.getHeight()/longueur;
+        float passk = view.getWidth()/Global.coeffdep;
         int x, y;
 
         c.drawColor(Color.LTGRAY);
@@ -100,25 +100,26 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
         for (int i = 0; i < xys.size(); i++) {
 
-          /**/  int instant = (int)(xys.get(i).getX()/pas);
+            if ((xys.get(i).getX()/pas) >= Global.offset && (xys.get(i).getX()/pas) <= view.getWidth()) {
 
-          /**/  if(estDansPage(instant,view)) {
+
                 if (xys.get(i).getDurartion() == 1)
-                    c.drawCircle(xys.get(i).getX(), xys.get(i).getY(), radius, p);
+                        c.drawCircle(xys.get(i).getX()-Global.offset*pas, xys.get(i).getY(), radius, p);
                 else {
-                    // DESSIN D'UN RECT
-                    int d = (xys.get(i).getDurartion());
-                    int xXYS = xys.get(i).getX();
-                    int caseXXYS = (int) (xXYS / pas);
-                    int xf = d + caseXXYS - 1;
-                    int coordXF = (int) (xf * pas + pas / 2);
-                    int yXYS = xys.get(i).getY();
-                    c.drawRoundRect(xXYS - radius, yXYS - radius, coordXF + radius, yXYS + radius, 20, 20, p);
+                        // DESSIN D'UN RECT
+                        int d = (xys.get(i).getDurartion());
+                        int xXYS = xys.get(i).getX();
+                        int caseXXYS = (int) (xXYS / pas);
+                        int xf = d + caseXXYS - 1;
+                        int coordXF = (int) (xf * pas + pas / 2);
+                        int yXYS = xys.get(i).getY();
+                        c.drawRoundRect(xXYS - radius, yXYS - radius, coordXF + radius, yXYS + radius, 20, 20, p);
 
                 }
             }
+       }
 
-        }
+
 
 
     }
@@ -165,7 +166,7 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
                 if(xPrevious==x && yPrevious==y) {
 
-                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,1,(offset-1)*(view.getHeight() ));
+                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,1, Global.offset, pas);
                     reDraw();
 
                 }
@@ -180,7 +181,7 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
                     xC = (int) (caseX * pas + pas / 2);
                     yC = (int) (caseY * pas + pas / 2);
 
-                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,d, (offset-1)*(view.getHeight())); //Sur le premier temps
+                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,d, Global.offset, pas); //Sur le premier temps
 
                     reDraw();
 
@@ -219,36 +220,9 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
         return false;
     }
 
-    public boolean estDansPage(int instant, View view){
-        float pas = view.getHeight()/longueur;
-        if((offset*(view.getHeight()/pas)>instant)&&(instant<(offset+1)*(view.getHeight()/pas))){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isPartitionEmpty (PartitionX partitionX){
-        if(partitionX.getSize()==0){
-            return true;
-        }
-        else
-            return false;
-    }
 
 
-    public void syncModelPart(){
-        PartitionX partitionX = Global.getPartition();
 
-        if(isPartitionEmpty(partitionX)){
-            //Clean du model
-            ModelArray modelArray = app.modelArray;
-            for (int i=0; i<modelArray.getModels().size(); i++){
-                Model model = modelArray.getModel(i);
-                model.reset();
-            }
-        }
-        // else rien
-    }
 
 
 }
