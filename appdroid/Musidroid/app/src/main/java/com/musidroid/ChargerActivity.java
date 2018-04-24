@@ -25,6 +25,10 @@ import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 import model.extended.PartitionX;
+import l2i013.musidroid.util.InstrumentName;
+import l2i013.musidroid.util.NoteName;
+import model.Global;
+import android.content.Intent;
 
 public class ChargerActivity extends AppCompatActivity {
 
@@ -147,20 +151,57 @@ public class ChargerActivity extends AppCompatActivity {
 
         PartitionX partitionX = new PartitionX(Integer.parseInt(racine.getAttribute("tempo"))); //Nouvelle Partition
 
+        int cpt = 0;    //Partie instrumental dans l'arraylist
 
+        /***PARCOURS INSTRUMENTPART***/
         for (int i = 0; i<racineNoeuds.getLength(); i++) {
             if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                final Node instrumentPart = racineNoeuds.item(i);
+                Element instrumentPart = (Element) racineNoeuds.item(i);
+                NodeList noeudNote = instrumentPart.getChildNodes();
 
-               System.out.println(instrumentPart.getNodeName());
-               NamedNodeMap attrInstrumentPart = instrumentPart.getAttributes();
-                //System.out.println(attrInstrumentPart.getNamedItem("Octave").);
+                String nameInstrumentPart = instrumentPart.getAttribute("Name");
+                int octave = Integer.parseInt(instrumentPart.getAttribute("Octave"));
+                String strInstrumentName = instrumentPart.getAttribute("Instrument");
 
+                partitionX.addPartX(InstrumentName.valueOf(strInstrumentName),octave, nameInstrumentPart);
+
+
+                /***PARCOURS NOTES POUR CHAQUES INSTUMENTPART***/
+                for (int j = 0; j <noeudNote.getLength(); j++){
+                    if(noeudNote.item(j).getNodeType() == Node.ELEMENT_NODE){
+
+                         Element note = (Element) noeudNote.item(j);
+
+                         int instant =Integer.parseInt(note.getAttribute("instant"));
+                         String nameNote = note.getAttribute("name").replace("#", "DIESE");
+                         int duree =Integer.parseInt(note.getAttribute("duree"));
+
+                         System.out.println(instant);
+
+                         partitionX.addNote(cpt,instant,NoteName.valueOf(nameNote),duree);
+
+
+
+
+
+                    }
+                }
+
+                cpt++; //Instrument suivant;
 
             }
         }
 
-        System.out.println(partitionX.getTempo());
+
+        Global.partitions = partitionX;
+        System.out.println(partitionX.toString());
+
+        /**Lancement de l'activité menu**/
+
+        Intent intent = new Intent(this, EditionActivity.class);
+        startActivity(intent);
+        finish();
+
 
     }
 
