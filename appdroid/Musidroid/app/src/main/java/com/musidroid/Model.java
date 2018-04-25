@@ -86,9 +86,12 @@ public class Model {
         }
         xys.add(new Position(x+(int)(offset*pas),y,d));
         partitionX.addNote(position, caseX+offset, noteName, d);
-        System.out.println("Offset "+offset);
-        System.out.println(caseX+offset);
 
+
+    }
+    /**Dans Edition Activity on recharge un nouveau model on le calque sur PartionX**/
+    public void addModel(int x, int y, int duration){
+        xys.add(new Position(x,y,duration)); //err il faut la case
     }
 
 

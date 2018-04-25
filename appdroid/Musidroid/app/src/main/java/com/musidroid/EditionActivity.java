@@ -148,14 +148,21 @@ public class EditionActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TouchActivity.class);
             startActivity(intent);
 
-            //Mdrr je sais meme pas pq ca marche j'ai pas fait exprès
+            /**A chaque clique sur EDIT on charge un nouveau model calqué depuis la partionX**/
 
-            int position = Global.partSelect;
             PartitionX partitionX = Global.getPartition();
             ArrayList<Model> modelArray = ModelArray.getmodels();
-
+            modelArray.clear();
             for (int i = 0; i<partitionX.getPartsX().size();i++){
                 Model model = new Model();
+
+                for (int j=0; j<partitionX.getPart(i).getNotes().size(); j++ ){
+                    Note note = partitionX.getPart(i).getNotes().get(j);
+                    int x = note.getInstant();
+                    int duration = note.getDuration();
+                    int y = note.getName().getNum();
+                    model.addModel(x,y,duration);
+                }
                 modelArray.add(model);
 
             }
