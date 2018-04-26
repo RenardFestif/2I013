@@ -91,7 +91,65 @@ public class Model {
     }
     /**Dans Edition Activity on recharge un nouveau model on le calque sur PartionX**/
     public void addModel(int x, int y, int duration){
-        xys.add(new Position(x,y,duration)); //err il faut la case
+
+
+        int yC=0 ;   //On remet les Y à l'endroit car Si=11 et on veut Si = 0
+
+
+        switch (y){
+            case 0:
+                yC = 11;
+                break;
+            case 1:
+                yC = 10;
+                break;
+            case 2:
+                yC = 9;
+                break;
+            case 3:
+                yC = 8;
+                break;
+
+            case 4:
+                yC = 7;
+                break;
+
+            case 5:
+                yC = 6;
+                break;
+
+            case 6:
+                yC = 5;
+                break;
+
+
+            case 7 :
+                yC = 4;
+                break;
+
+
+            case 8 :
+                yC = 3;
+                break;
+
+            case 9 :
+                yC = 2;
+                break;
+
+            case 10 :
+                yC = 1;
+                break;
+
+            case 11 :
+                yC = 0;
+                break;
+
+            default:
+                break;
+        }
+        int xC = (int) (x * Global.pas + Global.pas / 2);
+        yC = (int) (yC * Global.pas + Global.pas / 2);
+        xys.add(new Position(xC,yC,duration)); //err il faut la case
     }
 
 

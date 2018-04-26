@@ -145,6 +145,8 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
         int position = Global.partSelect;
         SurfaceView view = (SurfaceView) findViewById(R.id.boardSurface);
         float pas = view.getHeight()/longueur;
+
+        Global.pas = pas;
         int action = event.getAction();
         switch (action) {
 

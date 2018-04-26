@@ -16,6 +16,9 @@ public class Global {
     public static PartitionX partitions ;
     public static int partSelect = -1;
 
+    /*Pas de la surfaceview pour retrouver les coordonées en brut*/
+    public static float pas;
+
     /*Dans touch Board = Si le le doigt a glisse*/
     public static boolean moved = false;
 
