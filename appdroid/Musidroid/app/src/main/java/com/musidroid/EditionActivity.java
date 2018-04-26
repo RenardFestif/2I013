@@ -1,7 +1,13 @@
 package com.musidroid;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Intent;
+import android.widget.TextView;
+import android.widget.SeekBar;
+import android.widget.Button;
+import android.widget.Toast;
 
 import android.media.MediaPlayer;
 import android.support.design.widget.TabLayout;
@@ -103,6 +109,11 @@ public class EditionActivity extends AppCompatActivity {
                     case 0:
                         onClickDelete(tabLayout);
                         break;
+
+                    case 3:
+                        onClickSetTempo(tabLayout);
+                        break;
+
                     default:
                         break;
 
@@ -125,6 +136,7 @@ public class EditionActivity extends AppCompatActivity {
 
     public void onClickDelete(View view){
 
+
         if (Global.isPartSelected()){
             int position = Global.partSelect;
             ArrayList<Model> modelArray = ModelArray.getmodels();
@@ -132,13 +144,11 @@ public class EditionActivity extends AppCompatActivity {
             modelArray.remove(position);
             PartitionX partitionX = Global.getPartition();
             partitionX.removePart(position);
-            Intent intent = new Intent(this, EditionActivity.class);
-            startActivity(intent);
-            finish();
+            recreate();
+            Global.unSelect();
         }
-        else{
-            System.err.println("Select a Part");
-        }
+        else
+            Toast.makeText(EditionActivity.this, "sélectionnez une partie instrumental :D", Toast.LENGTH_LONG).show();
 
     }
 
@@ -171,7 +181,7 @@ public class EditionActivity extends AppCompatActivity {
 
         }
         else{
-            System.err.println("Select a Part");
+            Toast.makeText(EditionActivity.this, "sélectionnez une partie instrumental :D", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -210,6 +220,48 @@ public class EditionActivity extends AppCompatActivity {
 
         public void onClickSetTempo(View view){
 
+            int tempo = Global.partitions.getTempo();
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(EditionActivity.this);
+            View tView = getLayoutInflater().inflate(R.layout.dialog_tempo, null);
+
+            final TextView textview =(TextView)tView.findViewById(R.id.text_dialog_bpm);
+            textview.setText(tempo +" Bpm");
+            mBuilder.setView(tView);
+
+            SeekBar seekBar = (SeekBar) tView.findViewById(R.id.seekBarTempo);
+            seekBar.setProgress(tempo);
+            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    int newtempo = progress;
+                    textview.setText(newtempo+" Bpm");
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    Global.partitions.setTempo(seekBar.getProgress());
+                }
+            });
+            final AlertDialog dialog = mBuilder.create();
+
+            Button button = (Button) tView.findViewById(R.id.buton_dialog_tempo);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+
+
+
+
+            dialog.show();
         }
 
         public void onClickSave(View view){
@@ -219,9 +271,9 @@ public class EditionActivity extends AppCompatActivity {
 
 
 
-        // Err Fermeture
-        public void onClickExit(View view){
 
+        public void onClickExit(View view){
+            Global.unSelect(); //Remet la position du custom swipe a -1
             finish();
 
         }

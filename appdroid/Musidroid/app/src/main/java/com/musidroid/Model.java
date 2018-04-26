@@ -127,7 +127,6 @@ public class Model {
                 yC = 4;
                 break;
 
-
             case 8 :
                 yC = 3;
                 break;
