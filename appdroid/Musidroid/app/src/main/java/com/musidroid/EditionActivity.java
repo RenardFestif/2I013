@@ -128,6 +128,7 @@ public class EditionActivity extends AppCompatActivity {
 
     public void onClickAdd(View view){
         Intent intent = new Intent(this, InstrumentActivity.class);
+        Global.unSelect();
         startActivity(intent);
         finish();
 
@@ -141,27 +142,11 @@ public class EditionActivity extends AppCompatActivity {
             int position = Global.partSelect;
             ArrayList<Model> modelArray = ModelArray.getmodels();
 
-            modelArray.remove(position);
-            PartitionX partitionX = Global.getPartition();
-            partitionX.removePart(position);
-            recreate();
-            Global.unSelect();
-        }
-        else
-            Toast.makeText(EditionActivity.this, "sélectionnez une partie instrumental :D", Toast.LENGTH_LONG).show();
 
-    }
-
-    public void onClickEdit(View view){
-
-        if (Global.isPartSelected()){
-            Intent intent = new Intent(this, TouchActivity.class);
-            startActivity(intent);
-
-            /**A chaque clique sur EDIT on charge un nouveau model calqué depuis la partionX**/
+            /** on charge un nouveau model calqué depuis la partionX pour evité certaines erreurs (Nottament quand on delete une partie avant d'avoir cliquer une fois sur EDIT) **/
 
             PartitionX partitionX = Global.getPartition();
-            ArrayList<Model> modelArray = ModelArray.getmodels();
+
             modelArray.clear();
             for (int i = 0; i<partitionX.getPartsX().size();i++){
                 Model model = new Model();
@@ -177,7 +162,25 @@ public class EditionActivity extends AppCompatActivity {
 
             }
 
+            if (partitionX.getSize() == 0){
+                Toast.makeText(EditionActivity.this, "Euhh... rien à supprimer", Toast.LENGTH_LONG).show();     //Toast dialog
+            }
+            modelArray.remove(position);
+            partitionX.removePart(position);
+            recreate();
+            Global.unSelect();
+        }
+        else
+            Toast.makeText(EditionActivity.this, "sélectionnez une partie instrumental :D", Toast.LENGTH_LONG).show();      //Toast dialog
 
+    }
+
+    public void onClickEdit(View view){
+
+        if (Global.isPartSelected()){
+
+            Intent intent = new Intent(this, TouchActivity.class);
+            startActivity(intent);
 
         }
         else{
@@ -188,9 +191,13 @@ public class EditionActivity extends AppCompatActivity {
 
     public void onClickPlay(View view) {
 
-        //Recup de la partition
+
         Partition p = Global.getPartition();
 
+        if (p.getSize() == 0){
+            Toast.makeText(EditionActivity.this, "Difficile de jouer un morceau sans partition ;)", Toast.LENGTH_LONG).show();
+            return;
+        }
 
             TheApplication app = (TheApplication)(this.getApplicationContext());
             MidiFile2I013.write(new File(app.getFilesDir(), "tmp.mid"), p);

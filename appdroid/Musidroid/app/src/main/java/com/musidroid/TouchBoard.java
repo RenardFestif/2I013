@@ -76,6 +76,8 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
 
         float pas = view.getHeight()/longueur;
+        //On set le pas dans Global
+        Global.pas = pas;
         float passk = view.getWidth()/Global.coeffdep;
         int x, y;
 
@@ -127,6 +129,28 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.boardSurface);
+        float pas = surfaceView.getHeight()/longueur;
+        //On set le pas dans Global
+        Global.pas = pas;
+        /**A chaque clique sur EDIT on charge un nouveau model calqué depuis la partionX**/
+
+        PartitionX partitionX = Global.getPartition();
+        ArrayList<Model> modelArray = ModelArray.getmodels();
+        modelArray.clear();
+        for (int i = 0; i<partitionX.getPartsX().size();i++){
+            Model model = new Model();
+
+            for (int j=0; j<partitionX.getPart(i).getNotes().size(); j++ ){
+                Note note = partitionX.getPart(i).getNotes().get(j);
+                int x = note.getInstant();
+                int duration = note.getDuration();
+                int y = note.getName().getNum();
+                model.addModel(x,y,duration);
+            }
+            modelArray.add(model);
+
+        }
 
     }
     @Override
@@ -146,7 +170,7 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
         SurfaceView view = (SurfaceView) findViewById(R.id.boardSurface);
         float pas = view.getHeight()/longueur;
 
-        Global.pas = pas;
+
         int action = event.getAction();
         switch (action) {
 

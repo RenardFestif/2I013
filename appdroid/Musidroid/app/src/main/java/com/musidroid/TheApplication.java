@@ -16,9 +16,8 @@ public class TheApplication extends Application {
 
     public ModelArray getModelArray(){return modelArray;}
 
-    // ATTENTION SUPPRIME LE MODEL
-    public void reset(){
-        modelArray.reset();
+    public void newModel(ModelArray modelArray){
+        this.modelArray = modelArray;
     }
 
 

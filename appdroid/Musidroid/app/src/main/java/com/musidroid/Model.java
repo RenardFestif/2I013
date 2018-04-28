@@ -146,9 +146,10 @@ public class Model {
             default:
                 break;
         }
+
         int xC = (int) (x * Global.pas + Global.pas / 2);
-        yC = (int) (yC * Global.pas + Global.pas / 2);
-        xys.add(new Position(xC,yC,duration)); //err il faut la case
+        int realYC = (int) (yC * Global.pas + Global.pas / 2);
+        xys.add(new Position(xC,realYC,duration));
     }
 
 
