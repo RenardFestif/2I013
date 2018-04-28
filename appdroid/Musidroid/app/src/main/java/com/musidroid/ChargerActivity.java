@@ -40,7 +40,9 @@ public class ChargerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charger);
 
-        final View decorView = getWindow().getDecorView();
+
+        //Mis au point du mode fullScreen Imerssif
+        Global.fullScreenCall(this);
 
         ListView listePartition = findViewById(R.id.list_partitions);
 

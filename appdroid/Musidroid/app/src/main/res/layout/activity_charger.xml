@@ -41,7 +41,8 @@
                 android:onClick="onClickExitCharger"
                 android:text="Exit"
                 android:textAlignment="center"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:layout_margin="5sp"/>
         </RelativeLayout>
     </android.support.constraint.ConstraintLayout>
 

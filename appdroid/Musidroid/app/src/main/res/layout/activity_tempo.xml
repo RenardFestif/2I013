@@ -82,9 +82,11 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
+            android:hint="90"
             android:inputType="number"
-            android:text="90"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+
+            />
 
 
         <Button

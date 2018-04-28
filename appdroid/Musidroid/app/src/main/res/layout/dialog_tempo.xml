@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="20dp"
-        android:max="@android:integer/config_shortAnimTime"
+        android:max="@android:integer/config_mediumAnimTime"
         android:thumb="@android:drawable/radiobutton_off_background" />
 
     <LinearLayout

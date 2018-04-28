@@ -44,15 +44,10 @@ public class EditionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edition);
 
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        //Mis au point du mode fullScreen Imerssif
+        Global.fullScreenCall(this);
 
-        viewPager=(ViewPager) findViewById(R.id.CarousselViewPager);
+        viewPager= (ViewPager) findViewById(R.id.CarousselViewPager);
         customeSwipe = new CustomeSwipe(this);
         viewPager.setAdapter(customeSwipe);
 
@@ -69,25 +64,27 @@ public class EditionActivity extends AppCompatActivity {
                 switch (tab.getPosition()){
 
                     //Position icone + => Add partie
-                    case 1:
+                    case 0:
                         onClickAdd(tabLayout);
                         break;
 
                     // Select une Partie
-                    case 2:
+                    case 1:
                         onClickEdit(tabLayout);
                         break;
 
-                    case 0:
-                        onClickDelete(tabLayout);
-                        break;
 
-                    case 3:
+
+                    case 2:
                         onClickSetTempo(tabLayout);
                         break;
 
-                    case 4:
+                    case 3:
                         onClickSave(tabLayout);
+                        break;
+
+                    case 4:
+                        onClickDelete(tabLayout);
                         break;
 
                     default:
@@ -97,21 +94,26 @@ public class EditionActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                Toast.makeText(EditionActivity.this, "A toi de jouer l'artiste !", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 switch (tab.getPosition()) {
-                    case 2:
+                    case 0:
+                        onClickAdd(tabLayout);
+                        break;
+                    case 1:
                         onClickEdit(tabLayout);
                         break;
-                    case 0:
-                        onClickDelete(tabLayout);
-                        break;
-
-                    case 3:
+                    case 2:
                         onClickSetTempo(tabLayout);
+                        break;
+                    case 3:
+                        onClickSave(tabLayout);
+                        break;
+                    case 4:
+                        onClickDelete(tabLayout);
                         break;
 
                     default:
@@ -130,7 +132,8 @@ public class EditionActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InstrumentActivity.class);
         Global.unSelect();
         startActivity(intent);
-        finish();
+        /**GROS PB SI ON FAIT UN RETOUR SUR LES ECRANS SUIVANT ON RETOURNE à L'ACCEUIL !!!**/
+        /**https://developer.android.com/reference/android/content/Intent#FLAG_ACTIVITY_CLEAR_TOP**/
 
 
     }
