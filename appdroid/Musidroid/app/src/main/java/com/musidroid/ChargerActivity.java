@@ -205,4 +205,8 @@ public class ChargerActivity extends AppCompatActivity {
 
     }
 
+    public void onClickExitCharger(View view){
+        finish();
+    }
+
 }
