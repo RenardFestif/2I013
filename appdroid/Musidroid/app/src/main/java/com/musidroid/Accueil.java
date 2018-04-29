@@ -23,13 +23,16 @@ import model.Global;
 
 public class Accueil extends AppCompatActivity {
 
+    //Permet que les sons ne se melangent pas
+    int controler = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
         Global.fullScreenCall(this);
-        welcome();
+        //welcome();
 
 
 
@@ -38,7 +41,11 @@ public class Accueil extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        welcome();
+        if (controler ==0){
+            controler = 1;
+            welcome();
+        }
+
     }
 
     public void welcome(){
@@ -48,7 +55,7 @@ public class Accueil extends AppCompatActivity {
         chronometer.start();
 
         /**<3 MICHEL SARDOU <3**/
-        Partition intro = new Partition(210);
+        Partition intro = new Partition(300);
         intro.addPart(InstrumentName.TRUMPET, 5);
 
 
@@ -85,27 +92,27 @@ public class Accueil extends AppCompatActivity {
 
         /**Voix 2**/
 
-        // intro.addPart(InstrumentName.GUNSHOT, 4);
-        //
-        // intro.addNote(1, 0, NoteName.FA,1);
-        // intro.addNote(1, 2, NoteName.FA,1);
-        // intro.addNote(1, 4, NoteName.FA,1);
-        // intro.addNote(1, 6, NoteName.FA,1);
-        // intro.addNote(1, 8, NoteName.REDIESE,1);
-        // intro.addNote(1, 10, NoteName.REDIESE,1);
-        // intro.addNote(1, 12, NoteName.REDIESE,1);
-        // intro.addNote(1, 14, NoteName.REDIESE,1);
-        // intro.addNote(1, 16, NoteName.DODIESE,1);
-        // intro.addNote(1, 18, NoteName.DODIESE,1);
-        // intro.addNote(1, 20, NoteName.DODIESE,1);
-        // intro.addNote(1, 22, NoteName.DODIESE,1);
-        // intro.addNote(1, 24, NoteName.LADIESE,1);
-        // intro.addNote(1, 28, NoteName.LADIESE,1);
-        // intro.addNote(1, 30, NoteName.LADIESE,1);
-        // intro.addNote(1, 32, NoteName.LADIESE,1);
-        // intro.addNote(1, 34, NoteName.FA,1);
-        // intro.addNote(1, 36, NoteName.FA,1);
-        //
+        intro.addPart(InstrumentName.ACOUSTIC_BASS, 4);
+
+        intro.addNote(1, 0, NoteName.FA,2);
+        intro.addNote(1, 3, NoteName.FA,2);
+        intro.addNote(1, 6, NoteName.FA,2);
+        intro.addNote(1, 9, NoteName.FA,3);
+        intro.addNote(1, 12, NoteName.REDIESE,2);
+        intro.addNote(1, 15, NoteName.REDIESE,2);
+        intro.addNote(1, 18, NoteName.REDIESE,2);
+        intro.addNote(1, 21, NoteName.REDIESE,3);
+        intro.addNote(1, 24, NoteName.DODIESE,2);
+        intro.addNote(1, 27, NoteName.DODIESE,2);
+        intro.addNote(1, 30, NoteName.DODIESE,2);
+        intro.addNote(1, 33, NoteName.DODIESE,3);
+        intro.addNote(1, 36, NoteName.LADIESE,4);
+       
+       
+       
+       
+
+
 
 
 
@@ -138,9 +145,10 @@ public class Accueil extends AppCompatActivity {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
 
-                if (System.currentTimeMillis()-startTime >= 11000){
+                if (System.currentTimeMillis()-startTime >= 8000){
 
                     nextView(chronometer);
+                    controler = 0;
                 }
             }
         });

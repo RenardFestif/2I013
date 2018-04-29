@@ -46,19 +46,19 @@ tools:context="com.musidroid.InstrumentActivity">
         android:id="@+id/textChooseInstru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textPartOne"
+
         android:layout_below="@+id/textPartOne"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="-10dp"
+        android:fontFamily="@font/gloria_hallelujah"
+        android:gravity="center_horizontal"
 
         android:text="choisis un instrument"
-        android:gravity="center_horizontal"
-        android:fontFamily="@font/gloria_hallelujah"
         android:textColor="@color/colorLightBlack"
+
         android:textSize="15sp"
-        android:textStyle="bold"
-
-        android:layout_marginTop="-20dp"
-        android:layout_marginBottom="30dp"
-
-        android:layout_alignEnd="@+id/textPartOne"/>
+        android:textStyle="bold" />
 
 
     <ScrollView

@@ -58,19 +58,19 @@
         android:id="@+id/textChooseInstru"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textPartThree"
+        android:layout_alignEnd="@+id/textPartThree"
 
-        android:text="Nomme ta partie"
-        android:gravity="center_horizontal"
+        android:layout_below="@+id/textPartThree"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="-10dp"
         android:fontFamily="@font/gloria_hallelujah"
+        android:gravity="center_horizontal"
+        android:text="Nomme ta partie"
+
         android:textColor="@color/colorLightBlack"
         android:textSize="15sp"
-        android:textStyle="bold"
 
-        android:layout_marginTop="-20dp"
-        android:layout_marginBottom="30dp"
-
-        android:layout_alignEnd="@+id/textPartThree"/>
+        android:textStyle="bold" />
 
 
     <Button

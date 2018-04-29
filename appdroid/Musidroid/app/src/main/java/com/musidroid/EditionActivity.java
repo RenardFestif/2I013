@@ -88,13 +88,14 @@ public class EditionActivity extends AppCompatActivity {
                         break;
 
                     default:
+                        Toast.makeText(EditionActivity.this, "A toi de jouer l'artiste !", Toast.LENGTH_LONG).show();
                         break;
                 }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                Toast.makeText(EditionActivity.this, "A toi de jouer l'artiste !", Toast.LENGTH_LONG).show();
+
             }
 
             @Override
@@ -117,6 +118,7 @@ public class EditionActivity extends AppCompatActivity {
                         break;
 
                     default:
+                        Toast.makeText(EditionActivity.this, "A toi de jouer l'artiste !", Toast.LENGTH_LONG).show();
                         break;
 
                 }

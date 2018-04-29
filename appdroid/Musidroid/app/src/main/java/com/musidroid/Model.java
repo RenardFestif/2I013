@@ -76,16 +76,29 @@ public class Model {
         }
         assert noteName != null;
 
-        for(int i=0;i<xys.size();i++){
-            if(xys.get(i).getX()+offset*pas==x && xys.get(i).getY()==y) {
-                xys.remove(i);
-                partitionX.removeNote(position,caseX+offset, noteName);
-
-                return;
+        if(d==1) {
+            for (int i = 0; i < xys.size(); i++) {
+                if (xys.get(i).getX() == x + offset * pas && xys.get(i).getY() == y) {
+                    xys.remove(i);
+                    partitionX.removeNote(position, caseX + offset, noteName);
+                    return;
+                }
             }
+            xys.add(new Position(x + (int) (offset * pas), y, d));
+            partitionX.addNote(position, caseX + offset, noteName, d);
         }
-        xys.add(new Position(x+(int)(offset*pas),y,d));
-        partitionX.addNote(position, caseX+offset, noteName, d);
+        else{
+            for (int i = 0; i < xys.size(); i++) {
+                if (xys.get(i).getX() == x + offset * pas && xys.get(i).getY() == y) {
+                    xys.remove(i);
+                    partitionX.removeNote(position, caseX + offset, noteName);
+                    return;
+                }
+            }
+            xys.add(new Position(x + (int) (offset * pas), y, d));
+            System.out.println("durée : "+ d + " position : "+ x +" , "+ y);
+            partitionX.addNote(position, caseX + offset, noteName, d);
+        }
 
 
     }

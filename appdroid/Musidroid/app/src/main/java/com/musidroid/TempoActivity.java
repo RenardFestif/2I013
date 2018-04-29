@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import model.Global;
 import model.extended.PartitionX;
@@ -58,6 +59,11 @@ public class TempoActivity extends AppCompatActivity {
 
         EditText et = findViewById(R.id.tempoEditText);
         String tempostr = et.getText().toString();
+
+        if (tempostr.isEmpty()){
+            Toast.makeText(TempoActivity.this, " Avec un tempo ça serait plus simple ;) ", Toast.LENGTH_LONG).show();
+            return;
+        }
         int tempo= Integer.parseInt(tempostr);
 
 
