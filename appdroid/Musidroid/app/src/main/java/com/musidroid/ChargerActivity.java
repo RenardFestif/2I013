@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
+
+import model.Samples;
 import model.extended.PartitionX;
 import l2i013.musidroid.util.InstrumentName;
 import l2i013.musidroid.util.NoteName;
@@ -51,7 +53,7 @@ public class ChargerActivity extends AppCompatActivity {
 
         for (int i = 0; i < files.length; i++) {         // On les mets dans une arraylist
             String tampon = files[i];
-            if (tampon.contains(".xml"))
+            if (tampon.contains(".xml") || tampon.contains(".mid"))
                 fileList.add(files[i]);
 
         }
@@ -104,17 +106,28 @@ public class ChargerActivity extends AppCompatActivity {
 
                 /*Traitement du Bouton charger*/
                 Button charger = (Button) mView.findViewById(R.id.buttonLoad);
-                charger.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Action de lecture du Document XML
-                        String fileDir = getFilesDir()+"/"+fileList.get(position); //Chemin absolu du fichier selectionné
 
-                        Document document = readXML(fileDir);
-                        loadPartition(document);
+                /*Si c'est un fichier XML*/
+                if ( fileList.get(position).contains(".xml")){
+                    charger.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                    }
-                });
+                            //Action de lecture du Document XML
+                            String fileDir = getFilesDir()+"/"+fileList.get(position); //Chemin absolu du fichier selectionné
+
+                            Document document = readXML(fileDir);
+                            loadPartition(document);
+
+                        }
+                    });
+                }
+
+                /*Si c'est un fichier midi*/
+                else{
+                    Samples.read(getFilesDir()+"/"+fileList.get(position));
+                }
+
                 /*Fin Traitement bouton charger*/
 
                 dialog.show();

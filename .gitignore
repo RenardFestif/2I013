@@ -31,3 +31,5 @@ build.xml
 /MusiDROID/sound/
 /MusiDROID/private/
 /MusiDROID/dist/
+/MidiReader/nbproject/private/
+/MidiReader/build/

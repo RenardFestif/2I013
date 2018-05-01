@@ -16,6 +16,7 @@ import java.io.File;
 import l2i013.musidroid.util.InstrumentName;
 import l2i013.musidroid.util.MidiFile2I013;
 import l2i013.musidroid.util.NoteName;
+import model.Samples;
 import musidroid.Partition;
 
 import model.Global;
@@ -33,6 +34,8 @@ public class Accueil extends AppCompatActivity {
 
         Global.fullScreenCall(this);
         //welcome();
+
+
 
 
 
@@ -119,7 +122,7 @@ public class Accueil extends AppCompatActivity {
 
 
         TheApplication app = (TheApplication)(this.getApplicationContext());
-        MidiFile2I013.write(new File(app.getFilesDir(), "tmp.mid"), intro);
+        MidiFile2I013.write(new File(app.getFilesDir(), "intro.mid"), intro);
 
         MediaPlayer mPlayer = new MediaPlayer();
         MediaPlayer.OnPreparedListener mPrepared =
@@ -130,7 +133,7 @@ public class Accueil extends AppCompatActivity {
                 };
         mPlayer.setOnPreparedListener(mPrepared);
         try {
-            File f = new File(app.getFilesDir(), "tmp.mid");
+            File f = new File(app.getFilesDir(), "intro.mid");
             String path = f.getPath();
             mPlayer.setDataSource(path);
             mPlayer.setLooping(false);
