@@ -31,6 +31,7 @@ import l2i013.musidroid.util.InstrumentName;
 import l2i013.musidroid.util.NoteName;
 import model.Global;
 import android.content.Intent;
+import android.widget.Toast;
 
 public class ChargerActivity extends AppCompatActivity {
 
@@ -125,7 +126,22 @@ public class ChargerActivity extends AppCompatActivity {
 
                 /*Si c'est un fichier midi*/
                 else{
-                    Samples.read(getFilesDir()+"/"+fileList.get(position));
+
+                    charger.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        Toast.makeText(ChargerActivity.this, "Construction de la partition en cours ! Un peu de patience ;)", Toast.LENGTH_LONG).show();
+                        Samples.read(getFilesDir()+"/"+fileList.get(position));
+                        while (Global.isWriting){
+                             /*On attend la fin de la creation de la partition*/
+                        }
+
+                         onMidiCharger(v);
+
+                        }
+                    });
+
                 }
 
                 /*Fin Traitement bouton charger*/
@@ -214,6 +230,8 @@ public class ChargerActivity extends AppCompatActivity {
         /**Lancement de l'activité menu**/
 
         Intent intent = new Intent(this, EditionActivity.class);
+        //Flag pôur faire revenir au top Edition activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
 
@@ -222,6 +240,13 @@ public class ChargerActivity extends AppCompatActivity {
 
     public void onClickExitCharger(View view){
         finish();
+    }
+
+    public void onMidiCharger(View view){
+        Intent intent = new Intent(this, EditionActivity.class);
+        //Flag pôur faire revenir au top Edition activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 }

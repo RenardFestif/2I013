@@ -62,10 +62,9 @@
 
         android:layout_below="@+id/textPartThree"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="-10dp"
         android:fontFamily="@font/gloria_hallelujah"
         android:gravity="center_horizontal"
-        android:text="Nomme ta partie"
+        android:text="Nommes ta partie"
 
         android:textColor="@color/colorLightBlack"
         android:textSize="15sp"

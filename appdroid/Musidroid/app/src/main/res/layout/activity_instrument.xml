@@ -50,7 +50,6 @@ tools:context="com.musidroid.InstrumentActivity">
 
         android:layout_below="@+id/textPartOne"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="-10dp"
         android:fontFamily="@font/gloria_hallelujah"
         android:gravity="center_horizontal"
 

@@ -26,14 +26,23 @@ public class Accueil extends AppCompatActivity {
 
     //Permet que les sons ne se melangent pas
     int controler = 0;
+    TheApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
-        Global.fullScreenCall(this);
-        //welcome();
+        //Global.fullScreenCall(this);
+        //Global.isWriting = true;
+        //Samples.read(String.valueOf(R.raw.Lambada));
+        //while (Global.isWriting){
+        //
+        //}
+        //
+        ////welcome();
+        //
+        //MidiFile2I013.write(new File(app.getFilesDir(), "lambada.mid"),Global.partitions);
 
 
 
@@ -121,7 +130,7 @@ public class Accueil extends AppCompatActivity {
 
 
 
-        TheApplication app = (TheApplication)(this.getApplicationContext());
+
         MidiFile2I013.write(new File(app.getFilesDir(), "intro.mid"), intro);
 
         MediaPlayer mPlayer = new MediaPlayer();

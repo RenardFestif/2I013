@@ -63,7 +63,7 @@ public class InstrumentActivity extends AppCompatActivity implements View.OnClic
         cb.setChecked(false);
         startActivity(intent);
 
-        finish();
+
 
     }
 }

@@ -50,7 +50,7 @@ public class CustomeSwipe extends PagerAdapter {
 
               if(!Global.isPartSelected()){
                   Global.setPartSelect(position);
-                  textView.setBackgroundResource(R.color.colorBrokenWhite);
+                  textView.setBackgroundResource(R.color.colorLightGrey);
                   textViewPrev = textView;
 
                   System.out.println(Global.partSelect);
@@ -61,7 +61,7 @@ public class CustomeSwipe extends PagerAdapter {
                   System.out.println(Global.partSelect);
               }
               else if (Global.partSelect != position && Global.isPartSelected()){
-                  textView.setBackgroundResource(R.color.colorBrokenWhite);
+                  textView.setBackgroundResource(R.color.colorLightGrey);
                   Global.setPartSelect(position);
                   unselect(textViewPrev);
                   textViewPrev = textView;

@@ -54,7 +54,7 @@ public class OctaveActivity extends AppCompatActivity implements View.OnClickLis
 
         startActivity(intent);
 
-        finish();
+
 
 
     }

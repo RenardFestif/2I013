@@ -201,11 +201,12 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
                     Global.moved = false;  //fini de bouger
                     d = (int)(x/pas)-(int)(xPrevious/pas)+1;     //Durée
-                    System.out.println(d);
+
                     caseX = (int)(xPrevious/pas);
                     caseY = (int)(yPrevious/pas);
                     xC = (int) (caseX * pas + pas / 2);
                     yC = (int) (caseY * pas + pas / 2);
+                    System.out.println("Case X ="+caseX+" xC = "+xC);
 
                     app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,d, Global.offset, pas); //Sur le premier temps
 

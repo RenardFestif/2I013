@@ -85,17 +85,18 @@ public class Model {
                 }
             }
             xys.add(new Position(x + (int) (offset * pas), y, d));
+            System.out.println("durée : "+ d + " position : "+ x +" , "+ y);
             partitionX.addNote(position, caseX + offset, noteName, d);
         }
         else{
             for (int i = 0; i < xys.size(); i++) {
-                if (xys.get(i).getX() == x + offset * pas && xys.get(i).getY() == y) {
+                if (xys.get(i).getX() == x+ (int) (offset * pas) && xys.get(i).getY() == y) {
                     xys.remove(i);
                     partitionX.removeNote(position, caseX + offset, noteName);
                     return;
                 }
             }
-            xys.add(new Position(x + (int) (offset * pas), y, d));
+            xys.add(new Position(x, y, d));
             System.out.println("durée : "+ d + " position : "+ x +" , "+ y);
             partitionX.addNote(position, caseX + offset, noteName, d);
         }

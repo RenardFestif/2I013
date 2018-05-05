@@ -8,6 +8,7 @@ import model.extended.PartitionX;
 import android.view.View;
 import android.os.Build;
 import android.app.Activity;
+import android.content.Intent;
 
 
 /**
@@ -20,6 +21,9 @@ public class Global {
     public static PartitionX partitions ;
     public static int partSelect = -1;
 
+    /*Permet de savoir si on est en train de construire une partition a partir d'un fichier midi (car ca prend un peut de temps)*/
+    public static boolean isWriting = false;
+
     /*Pas de la surfaceview pour retrouver les coordonées en brut*/
     public static float pas;
 
@@ -31,6 +35,10 @@ public class Global {
 
     /*OffSet en terme de d'instant*/
     public static int offset;
+
+
+    /*Intent de edition activity pour pouvoir le remettre au premier plan si il a deja été créee*/
+    public static Intent editionActivity =null;
 
 
     public static void addPartition(PartitionX p){
@@ -100,4 +108,10 @@ public class Global {
                 });
     }
 
+    public static boolean intentExist (){
+        if (editionActivity == null){
+            return false;
+        }
+        return true;
+    }
 }

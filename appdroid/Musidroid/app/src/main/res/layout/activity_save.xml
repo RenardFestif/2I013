@@ -61,19 +61,18 @@
             android:id="@+id/textCompliment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textNameIt"
+
             android:layout_below="@+id/textNameIt"
-
-            android:text="Bravo l'artiste =)"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/gloria_hallelujah"
-            android:textColor="@color/colorLightBlack"
-            android:textSize="15sp"
-            android:textStyle="bold"
-
-            android:layout_marginTop="-20dp"
             android:layout_marginBottom="30dp"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:gravity="center_horizontal"
+            android:text="Bravo l'artiste =)"
+            android:textColor="@color/colorLightBlack"
 
-            android:layout_alignEnd="@+id/textNameIt"/>
+            android:textSize="15sp"
+
+            android:textStyle="bold" />
 
 
         <Button

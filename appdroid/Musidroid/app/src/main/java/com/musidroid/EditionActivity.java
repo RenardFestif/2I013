@@ -41,6 +41,10 @@ public class EditionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Intent créee mis a jour dans global
+        Global.editionActivity = this.getIntent();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edition);
 
@@ -134,10 +138,6 @@ public class EditionActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InstrumentActivity.class);
         Global.unSelect();
         startActivity(intent);
-        /**GROS PB SI ON FAIT UN RETOUR SUR LES ECRANS SUIVANT ON RETOURNE à L'ACCEUIL !!!**/
-        /**https://developer.android.com/reference/android/content/Intent#FLAG_ACTIVITY_CLEAR_TOP**/
-
-
     }
 
     public void onClickDelete(View view){
@@ -227,6 +227,8 @@ public class EditionActivity extends AppCompatActivity {
             } catch (Exception e) {
             }
 
+            deleteFile("tmp.mid");
+
         }
 
 
@@ -286,7 +288,16 @@ public class EditionActivity extends AppCompatActivity {
 
         public void onClickExit(View view){
             Global.unSelect(); //Remet la position du custom swipe a -1
-            finish();
+
+            //Activity fini donc intent fini mis a jour dans global
+            Global.editionActivity = null;
+
+
+            Intent intent = new Intent(this, Accueil2.class);
+            //Flag pôur faire revenir au top l'acceuil
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
 
         }
 }
