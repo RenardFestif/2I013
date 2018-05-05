@@ -102,7 +102,9 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
         for (int i = 0; i < xys.size(); i++) {
 
-            if ((xys.get(i).getX()/pas) >= Global.offset && (xys.get(i).getX()/pas) <= view.getWidth()) {
+             /*+xys.get(i).getDurartion() permet de continuer l'affichage de la note longue meme si on dépasse l'offset */
+             
+            if ((xys.get(i).getX()/pas)+xys.get(i).getDurartion() >= Global.offset && (xys.get(i).getX()/pas) <= view.getWidth()) {
 
 
                 if (xys.get(i).getDurartion() == 1)
