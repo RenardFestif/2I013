@@ -83,7 +83,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".ChargerActivity"></activity>
+        <activity android:name=".ChargerActivity" />
+        <activity android:name=".NavigateurActivity"></activity>
     </application>
 
 </manifest>

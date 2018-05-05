@@ -249,4 +249,9 @@ public class ChargerActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickImporterMidi(View view){
+        Intent intent = new Intent(this, NavigateurActivity.class);
+        startActivity(intent);
+    }
+
 }
