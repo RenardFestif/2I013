@@ -31,7 +31,7 @@ public class Global {
     public static boolean moved = false;
 
     /*Coefficient de deplacement pour la seekbar */
-    public static int coeffdep = 4;
+    public static int coeffdep = 1;
 
     /*OffSet en terme de d'instant*/
     public static int offset;

@@ -5,7 +5,8 @@ public class Position {
     int duration;
     Position(int x, int y) { this.x = x; this.y = y; }
     Position(int x, int y, int duration){
-        this(x,y);
+        this.x = x;
+        this.y = y;
         this.duration = duration;
     }
 
