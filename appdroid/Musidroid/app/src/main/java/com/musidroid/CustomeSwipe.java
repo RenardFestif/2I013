@@ -21,6 +21,7 @@ public class CustomeSwipe extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
     private ArrayList <String> names = new ArrayList<>();
+    TextView textViewPrev;
 
     public CustomeSwipe(Context context){
         this.context = context;
@@ -47,17 +48,41 @@ public class CustomeSwipe extends PagerAdapter {
             @Override
             public void onClick(View v) {
 
+              if(!Global.isPartSelected()){
+                  Global.setPartSelect(position);
+                  textView.setBackgroundResource(R.color.colorLightGrey);
+                  textViewPrev = textView;
 
-                if(Global.isPartSelected() && Global.partSelect != position){
-                    Global.setPartSelect(position);
-                }
-                else if(Global.isPartSelected() &&  Global.partSelect == position){
-                    Global.unSelect();
-                }
-                else {
-                    Global.setPartSelect(position);
-
-                }
+                  System.out.println(Global.partSelect);
+              }
+              else if (Global.partSelect == position){
+                  textView.setBackgroundResource(R.color.colorWhite);
+                  Global.unSelect();
+                  System.out.println(Global.partSelect);
+              }
+              else if (Global.partSelect != position && Global.isPartSelected()){
+                  textView.setBackgroundResource(R.color.colorLightGrey);
+                  Global.setPartSelect(position);
+                  unselect(textViewPrev);
+                  textViewPrev = textView;
+                  System.out.println(Global.partSelect);
+              }
+              
+              //  if(Global.isPartSelected() && Global.partSelect != position){
+              //      Global.setPartSelect(position);
+              //      textView.setBackgroundResource(R.color.colorBrokenWhite);
+              //      //textViewPrev = textView;
+              //  }
+              //  else if(Global.isPartSelected() &&  Global.partSelect == position){
+              //      Global.unSelect();
+              //      unselect(textView);
+              //  }
+              //  else if (!Global.isPartSelected() &&)
+              //  else {
+              //      Global.setPartSelect(position);
+              //      unselect(textViewPrev);
+              //
+              //  }
 
 
             }
@@ -65,6 +90,10 @@ public class CustomeSwipe extends PagerAdapter {
 
         container.addView(view);
         return view;
+    }
+
+    public void unselect(TextView textView){
+        textView.setBackgroundResource(R.color.colorWhite);
     }
 
     @Override

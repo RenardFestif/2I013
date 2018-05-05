@@ -20,15 +20,18 @@ public class ModelArray {
         return models;
     }
 
+    public ArrayList<Model> getModels(){return models;}
+
     public void addModel (Model model){
         models.add(model);
     }
 
-    public void reset(){
-        for (int i=0;i<models.size(); i++) {
-            models.get(i).reset();
+    public static void setModels(ArrayList<Model> mod) {
+        models = new ArrayList<>();
+        for(int i=0;i<mod.size();i++){
+            models.add(mod.get(i));
         }
-
-        //models.clear();
     }
+
+
 }

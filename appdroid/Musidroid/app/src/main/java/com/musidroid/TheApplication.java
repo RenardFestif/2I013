@@ -3,6 +3,7 @@ package com.musidroid;
 import android.app.Application;
 
 import model.Global;
+import model.Samples;
 
 public class TheApplication extends Application {
 
@@ -16,9 +17,8 @@ public class TheApplication extends Application {
 
     public ModelArray getModelArray(){return modelArray;}
 
-    // ATTENTION SUPPRIME LE MODEL
-    public void reset(){
-        modelArray.reset();
+    public void newModel(ModelArray modelArray){
+        this.modelArray = modelArray;
     }
 
 

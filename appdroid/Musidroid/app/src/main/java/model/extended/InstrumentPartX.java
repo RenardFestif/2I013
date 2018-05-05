@@ -22,6 +22,11 @@ public class InstrumentPartX extends InstrumentPart {
 
     }
 
+    public InstrumentPartX (InstrumentName instrumentName, int octave, String name){
+        this(instrumentName,octave);
+        this.name = name;
+    }
+
     public String getName(){
         return name;
     }

@@ -6,26 +6,45 @@
     android:layout_height="match_parent"
     tools:context="com.musidroid.ChargerActivity">
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/textView8"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/gloria_hallelujah"
-            android:text="@string/charger_une_ancienne_partition"
-            android:textAlignment="center"
-            android:textColor="@color/colorLightBlack"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/list_partitions"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/textView8"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gloria_hallelujah"
+                android:text="@string/charger_une_ancienne_partition"
+                android:textAlignment="center"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/list_partitions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textView8"
+                android:layout_centerHorizontal="true">
+
+            </ListView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:onClick="onClickExitCharger"
+                android:text="Exit"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:layout_margin="5sp"/>
+        </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+
+
 </LinearLayout>

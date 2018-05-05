@@ -37,6 +37,12 @@ public class PartitionX extends Partition{
         instrumentPartX.get(i).addNote(t,n,d);
     }
 
+    // Utiliser dans la creation a partir du XML car decalage d'indentation
+    public void addPartX(InstrumentName name, int o, String namepart){
+        super.addPart(name, o);
+        instrumentPartX.add(new InstrumentPartX(name,o,namepart));
+    }
+
     public void removeNote(int i, int t, NoteName n){
         InstrumentPart instrumentPart = super.getPart(i);
         instrumentPart.removeNote(t, n);
