@@ -3,6 +3,8 @@ package com.musidroid;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.app.AlertDialog;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import org.xml.sax.SAXException;
 import android.widget.TextView;
@@ -25,6 +30,7 @@ import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
 
+import l2i013.musidroid.util.MidiFile2I013;
 import model.Samples;
 import model.extended.PartitionX;
 import l2i013.musidroid.util.InstrumentName;
@@ -67,13 +73,13 @@ public class ChargerActivity extends AppCompatActivity {
         listePartition.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
 
-            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
+            public void onItemClick(AdapterView<?> adapterView, final View view, final int position, long id) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(ChargerActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_load_erase, null);
 
 
                 /*Setting name in textview*/
-                String name = fileList.get(position);
+                final String name = fileList.get(position);
                 TextView fileName = (TextView) mView.findViewById(R.id.fileName);
                 fileName.setText(name);
 
@@ -119,6 +125,7 @@ public class ChargerActivity extends AppCompatActivity {
 
                             Document document = readXML(fileDir);
                             loadPartition(document);
+                            onMidiCharger(v);
 
                         }
                     });
@@ -145,6 +152,65 @@ public class ChargerActivity extends AppCompatActivity {
                 }
 
                 /*Fin Traitement bouton charger*/
+
+
+                /*Traitement button exporter*/
+                 Button export = (Button) mView.findViewById(R.id.export_button);
+
+                /*Cas si c'est un fichier XML*/
+                if ( fileList.get(position).contains(".xml")){
+                    export.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            //Action de lecture du Document XML
+                            String fileDir = getFilesDir()+"/"+fileList.get(position); //Chemin absolu du fichier selectionné
+
+                            String name = fileList.get(position);
+                            name.replace(".xml",".mid");
+
+                            Document document = readXML(fileDir);
+                            loadPartition(document);
+                            TheApplication app =(TheApplication) getApplication();
+
+                            File f = new File(app.getFilesDir(), "exported.mid");
+                            MidiFile2I013.write(f, Global.getPartition());
+
+                            FileOutputStream oc = null;
+                            FileInputStream fis = null;
+
+                            try {
+
+
+                                fis = new FileInputStream(f);
+                                oc = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath()+name);
+                                byte[] buf = new byte[8];
+                                int n = 0;
+                                while ((n = fis.read(buf)) >= 0) {
+                                    oc.write(buf);
+                                    buf = new byte[8];
+
+
+                                }
+
+                                oc.close();
+                                fis.close();
+                            }
+                            catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                            catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            deleteFile("exported.mid");
+
+
+
+
+
+                        }
+                    });
+                }
 
                 dialog.show();
 
@@ -227,16 +293,12 @@ public class ChargerActivity extends AppCompatActivity {
         Global.partitions = partitionX;
         System.out.println(partitionX.toString());
 
-        /**Lancement de l'activité menu**/
 
-        Intent intent = new Intent(this, EditionActivity.class);
-        //Flag pôur faire revenir au top Edition activity
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
 
 
     }
+
+
 
     public void onClickExitCharger(View view){
         finish();

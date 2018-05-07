@@ -72,6 +72,7 @@ public class Samples implements MidiEventListener {
 
         NoteOn note = (NoteOn) midiEvent;
         int index = note.getChannel();
+        
 
         //12 etant le nombre de notes diffferentes
         int notename = note.getNoteValue() % 12;
@@ -79,6 +80,8 @@ public class Samples implements MidiEventListener {
         int octave = (note.getNoteValue() / 10);
         //Instant actuel
         int instant = (int) note.getTick();
+
+        System.out.println(NOTE_NAMES[notename]+" "+octave+" "+instant+ " "+index);
 
 
 
@@ -104,6 +107,10 @@ public class Samples implements MidiEventListener {
             }
 
         } else {
+
+
+
+
                 notes.add(index,new HashMap<NoteName, Integer>());
                 notes.get(index).put(NOTE_NAMES[notename], instant);
 
@@ -153,6 +160,7 @@ public class Samples implements MidiEventListener {
 
         //tempo
         tempo = midi.getResolution();
+        System.out.println(tempo);
 
         //On cree la partition
         partitionX = new PartitionX(midi.getResolution());

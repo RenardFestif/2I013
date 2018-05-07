@@ -8,6 +8,11 @@
     tools:context="com.musidroid.NavigateurActivity">
 
 
+    <TextView
+        android:id="@+id/text_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
     <ListView
         android:id="@+id/list_fichier"

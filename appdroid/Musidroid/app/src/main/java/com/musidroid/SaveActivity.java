@@ -75,7 +75,6 @@ public class SaveActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        System.out.println(xmlText);
         finish();
 
     }
