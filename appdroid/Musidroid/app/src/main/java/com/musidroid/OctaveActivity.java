@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 
+import model.Global;
+
 public class OctaveActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String EXTRA_INSTRU = "com.musidroid.INSTRU";
@@ -16,11 +18,8 @@ public class OctaveActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_octave);
 
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        /*Mode Immersif*/
+        Global.fullScreenCall(this);
 
         RadioButton rb =new RadioButton(this);
         rb.setOnClickListener(this);
@@ -55,7 +54,7 @@ public class OctaveActivity extends AppCompatActivity implements View.OnClickLis
 
         startActivity(intent);
 
-        finish();
+
 
 
     }

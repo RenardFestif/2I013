@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import model.Global;
+
 
 public class Accueil2 extends AppCompatActivity {
 
@@ -13,12 +15,7 @@ public class Accueil2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil2);
 
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-
+        Global.fullScreenCall(this);
 
 
 
@@ -34,7 +31,7 @@ public class Accueil2 extends AppCompatActivity {
     public void onClickCharger (View view){
         Intent intent = new Intent(this, ChargerActivity.class);
         startActivity(intent);
-        ;
+
     }
 
 }

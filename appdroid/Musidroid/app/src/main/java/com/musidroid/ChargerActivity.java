@@ -3,6 +3,8 @@ package com.musidroid;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.app.AlertDialog;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import org.xml.sax.SAXException;
 import android.widget.TextView;
@@ -24,7 +29,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 import java.io.FileInputStream;
+
+import l2i013.musidroid.util.MidiFile2I013;
+import model.Samples;
 import model.extended.PartitionX;
+import l2i013.musidroid.util.InstrumentName;
+import l2i013.musidroid.util.NoteName;
+import model.Global;
+import android.content.Intent;
+import android.widget.Toast;
 
 public class ChargerActivity extends AppCompatActivity {
 
@@ -36,7 +49,9 @@ public class ChargerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charger);
 
-        final View decorView = getWindow().getDecorView();
+
+        //Mis au point du mode fullScreen Imerssif
+        Global.fullScreenCall(this);
 
         ListView listePartition = findViewById(R.id.list_partitions);
 
@@ -45,7 +60,7 @@ public class ChargerActivity extends AppCompatActivity {
 
         for (int i = 0; i < files.length; i++) {         // On les mets dans une arraylist
             String tampon = files[i];
-            if (tampon.contains(".xml"))
+            if (tampon.contains(".xml") || tampon.contains(".mid"))
                 fileList.add(files[i]);
 
         }
@@ -58,13 +73,13 @@ public class ChargerActivity extends AppCompatActivity {
         listePartition.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
 
-            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
+            public void onItemClick(AdapterView<?> adapterView, final View view, final int position, long id) {
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(ChargerActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_load_erase, null);
 
 
                 /*Setting name in textview*/
-                String name = fileList.get(position);
+                final String name = fileList.get(position);
                 TextView fileName = (TextView) mView.findViewById(R.id.fileName);
                 fileName.setText(name);
 
@@ -98,18 +113,48 @@ public class ChargerActivity extends AppCompatActivity {
 
                 /*Traitement du Bouton charger*/
                 Button charger = (Button) mView.findViewById(R.id.buttonLoad);
-                charger.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Action de lecture du Document XML
-                        String fileDir = getFilesDir()+"/"+fileList.get(position); //Chemin absolu du fichier selectionné
 
-                        Document document = readXML(fileDir);
-                        loadPartition(document);
+                /*Si c'est un fichier XML*/
+                if ( fileList.get(position).contains(".xml")){
+                    charger.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                    }
-                });
+                            //Action de lecture du Document XML
+                            String fileDir = getFilesDir()+"/"+fileList.get(position); //Chemin absolu du fichier selectionné
+
+                            Document document = readXML(fileDir);
+                            loadPartition(document);
+                            onMidiCharger(v);
+
+                        }
+                    });
+                }
+
+                /*Si c'est un fichier midi*/
+                else{
+
+                    charger.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        Toast.makeText(ChargerActivity.this, "Construction de la partition en cours ! Un peu de patience ;)", Toast.LENGTH_LONG).show();
+                        Samples.read(getFilesDir()+"/"+fileList.get(position));
+                        while (Global.isWriting){
+                             /*On attend la fin de la creation de la partition*/
+                        }
+
+                         onMidiCharger(v);
+
+                        }
+                    });
+
+                }
+
                 /*Fin Traitement bouton charger*/
+
+
+                
 
                 dialog.show();
 
@@ -147,21 +192,72 @@ public class ChargerActivity extends AppCompatActivity {
 
         PartitionX partitionX = new PartitionX(Integer.parseInt(racine.getAttribute("tempo"))); //Nouvelle Partition
 
+        int cpt = 0;    //Partie instrumental dans l'arraylist
 
+        /***PARCOURS INSTRUMENTPART***/
         for (int i = 0; i<racineNoeuds.getLength(); i++) {
             if(racineNoeuds.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                final Node instrumentPart = racineNoeuds.item(i);
+                Element instrumentPart = (Element) racineNoeuds.item(i);
+                NodeList noeudNote = instrumentPart.getChildNodes();
 
-               System.out.println(instrumentPart.getNodeName());
-               NamedNodeMap attrInstrumentPart = instrumentPart.getAttributes();
-                //System.out.println(attrInstrumentPart.getNamedItem("Octave").);
+                String nameInstrumentPart = instrumentPart.getAttribute("Name");
+                int octave = Integer.parseInt(instrumentPart.getAttribute("Octave"));
+                String strInstrumentName = instrumentPart.getAttribute("Instrument");
 
+                partitionX.addPartX(InstrumentName.valueOf(strInstrumentName),octave, nameInstrumentPart);
+
+
+                /***PARCOURS NOTES POUR CHAQUES INSTUMENTPART***/
+                for (int j = 0; j <noeudNote.getLength(); j++){
+                    if(noeudNote.item(j).getNodeType() == Node.ELEMENT_NODE){
+
+                         Element note = (Element) noeudNote.item(j);
+
+                         int instant =Integer.parseInt(note.getAttribute("instant"));
+                         String nameNote = note.getAttribute("name").replace("#", "DIESE");
+                         int duree =Integer.parseInt(note.getAttribute("duree"));
+
+                         System.out.println(instant);
+
+                         partitionX.addNote(cpt,instant,NoteName.valueOf(nameNote),duree);
+
+
+
+
+
+                    }
+                }
+
+                cpt++; //Instrument suivant;
 
             }
         }
 
-        System.out.println(partitionX.getTempo());
 
+        Global.partitions = partitionX;
+        System.out.println(partitionX.toString());
+
+
+
+
+    }
+
+
+
+    public void onClickExitCharger(View view){
+        finish();
+    }
+
+    public void onMidiCharger(View view){
+        Intent intent = new Intent(this, EditionActivity.class);
+        //Flag pôur faire revenir au top Edition activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    public void onClickImporterMidi(View view){
+        Intent intent = new Intent(this, NavigateurActivity.class);
+        startActivity(intent);
     }
 
 }

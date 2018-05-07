@@ -76,7 +76,8 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
 
         float pas = view.getHeight()/longueur;
-        float passk = view.getWidth()/Global.coeffdep;
+        //On set le pas dans Global
+        Global.pas = pas;
         int x, y;
 
         c.drawColor(Color.LTGRAY);
@@ -94,26 +95,32 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
             }
 
         }
+        /* Fibn de dessin des petits points */
 
         ArrayList<Position> xys = m.getArray();
 
 
         for (int i = 0; i < xys.size(); i++) {
 
-            if ((xys.get(i).getX()/pas) >= Global.offset && (xys.get(i).getX()/pas) <= view.getWidth()) {
+             /*+xys.get(i).getDurartion() permet de continuer l'affichage de la note longue meme si on dépasse l'offset */
+
+            if ((xys.get(i).getX()/pas)+xys.get(i).getDurartion() >= Global.offset && (xys.get(i).getX()/pas) <= view.getWidth()) {
 
 
                 if (xys.get(i).getDurartion() == 1)
                         c.drawCircle(xys.get(i).getX()-Global.offset*pas, xys.get(i).getY(), radius, p);
                 else {
                         // DESSIN D'UN RECT
+
+                        // ne pas oublier le décalage de -Global.offset*pas <!>
+
                         int d = (xys.get(i).getDurartion());
-                        int xXYS = xys.get(i).getX();
+                        int xXYS = (int)(xys.get(i).getX());
                         int caseXXYS = (int) (xXYS / pas);
                         int xf = d + caseXXYS - 1;
-                        int coordXF = (int) (xf * pas + pas / 2);
+                        int coordXF = (int) ((xf * pas + pas / 2)-Global.offset*pas);
                         int yXYS = xys.get(i).getY();
-                        c.drawRoundRect(xXYS - radius, yXYS - radius, coordXF + radius, yXYS + radius, 20, 20, p);
+                        c.drawRoundRect(xXYS - radius -Global.offset*pas, yXYS - radius, coordXF + radius, yXYS + radius, 20, 20, p);
 
                 }
             }
@@ -127,6 +134,28 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        SurfaceView surfaceView = (SurfaceView) findViewById(R.id.boardSurface);
+        float pas = surfaceView.getHeight()/longueur;
+        //On set le pas dans Global
+        Global.pas = pas;
+        /**A chaque clique sur EDIT on charge un nouveau model calqué depuis la partionX**/
+
+        PartitionX partitionX = Global.getPartition();
+        ArrayList<Model> modelArray = ModelArray.getmodels();
+        modelArray.clear();
+        for (int i = 0; i<partitionX.getPartsX().size();i++){
+            Model model = new Model();
+
+            for (int j=0; j<partitionX.getPart(i).getNotes().size(); j++ ){
+                Note note = partitionX.getPart(i).getNotes().get(j);
+                int x = note.getInstant();
+                int duration = note.getDuration();
+                int y = note.getName().getNum();
+                model.addModel(x,y,duration);
+            }
+            modelArray.add(model);
+
+        }
 
     }
     @Override
@@ -145,6 +174,8 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
         int position = Global.partSelect;
         SurfaceView view = (SurfaceView) findViewById(R.id.boardSurface);
         float pas = view.getHeight()/longueur;
+
+
         int action = event.getAction();
         switch (action) {
 
@@ -176,13 +207,17 @@ public class TouchBoard extends SurfaceView implements SurfaceHolder.Callback  {
                     Global.moved = false;  //fini de bouger
                     d = (int)(x/pas)-(int)(xPrevious/pas)+1;     //Durée
                     System.out.println(d);
+
+                    //int caseXMove = (int)(xPrevious/pas);
+                    //int caseYMove = (int)(yPrevious/pas);
+                    //int xCMove = (int) (caseX * pas + pas / 2);
+                    //int yCMove = (int) (caseY * pas + pas / 2);
+
                     caseX = (int)(xPrevious/pas);
                     caseY = (int)(yPrevious/pas);
                     xC = (int) (caseX * pas + pas / 2);
                     yC = (int) (caseY * pas + pas / 2);
-
-                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY,d, Global.offset, pas); //Sur le premier temps
-
+                    app.getModelArray().getModel(position).addRemove(xC, yC, caseX, caseY ,d, Global.offset, pas); //Sur le premier temps
                     reDraw();
 
 

@@ -76,19 +76,100 @@ public class Model {
         }
         assert noteName != null;
 
-        for(int i=0;i<xys.size();i++){
-            if(xys.get(i).getX()+offset*pas==x && xys.get(i).getY()==y) {
-                xys.remove(i);
-                partitionX.removeNote(position,caseX+offset, noteName);
-
-                return;
+        //if(d==1) {
+            /*Debug*/
+            System.out.println(x);
+            System.out.println(x + (int) (offset * pas));
+            /*Fin*/
+            for (int i = 0; i < xys.size(); i++) {
+                if (xys.get(i).getX() == x + offset * pas && xys.get(i).getY() == y) {
+                    xys.remove(i);
+                    partitionX.removeNote(position, caseX + offset, noteName);
+                    return;
+                }
             }
-        }
-        xys.add(new Position(x+(int)(offset*pas),y,d));
-        partitionX.addNote(position, caseX+offset, noteName, d);
-        System.out.println("Offset "+offset);
-        System.out.println(caseX+offset);
+            xys.add(new Position(x + (int) (offset * pas), y, d));
+            partitionX.addNote(position, caseX + offset, noteName, d);
+        //}
+        //else{
+        //    /*Debug*/
+        //    System.out.println(x);
+        //    System.out.println(x + (int) (offset * pas));
+        //    /*Fin*/
+        //    for (int i = 0; i < xys.size(); i++) {
+        //        if (xys.get(i).getX() == x && xys.get(i).getY() == y) {
+        //            xys.remove(i);
+        //            partitionX.removeNote(position, caseX + offset, noteName);
+        //            return;
+        //        }
+        //    }
+        //    xys.add(new Position(x , y, d));
+        //    partitionX.addNote(position, caseX + offset, noteName, d);
+        //}
 
+
+    }
+    /**Dans Edition Activity on recharge un nouveau model on le calque sur PartionX**/
+    public void addModel(int x, int y, int duration){
+
+
+        int yC=0 ;   //On remet les Y à l'endroit car Si=11 et on veut Si = 0
+
+
+        switch (y){
+            case 0:
+                yC = 11;
+                break;
+            case 1:
+                yC = 10;
+                break;
+            case 2:
+                yC = 9;
+                break;
+            case 3:
+                yC = 8;
+                break;
+
+            case 4:
+                yC = 7;
+                break;
+
+            case 5:
+                yC = 6;
+                break;
+
+            case 6:
+                yC = 5;
+                break;
+
+
+            case 7 :
+                yC = 4;
+                break;
+
+            case 8 :
+                yC = 3;
+                break;
+
+            case 9 :
+                yC = 2;
+                break;
+
+            case 10 :
+                yC = 1;
+                break;
+
+            case 11 :
+                yC = 0;
+                break;
+
+            default:
+                break;
+        }
+
+        int xC = (int) (x * Global.pas + Global.pas / 2);
+        int realYC = (int) (yC * Global.pas + Global.pas / 2);
+        xys.add(new Position(xC,realYC,duration));
     }
 
 

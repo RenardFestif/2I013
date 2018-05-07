@@ -48,19 +48,18 @@
             android:id="@+id/textChooseTempo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textPartFour"
+            android:layout_alignEnd="@+id/textPartFour"
 
-            android:text="Règle ton tempo"
-            android:gravity="center_horizontal"
+            android:layout_below="@+id/textPartFour"
+            android:layout_marginBottom="30dp"
             android:fontFamily="@font/gloria_hallelujah"
+            android:gravity="center_horizontal"
+            android:text="Règle ton tempo"
+
             android:textColor="@color/colorLightBlack"
             android:textSize="15sp"
-            android:textStyle="bold"
 
-            android:layout_marginTop="-20dp"
-            android:layout_marginBottom="30dp"
-
-            android:layout_alignEnd="@+id/textPartFour"/>
+            android:textStyle="bold" />
 
 
         <Button
@@ -82,9 +81,11 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
+            android:hint="90"
             android:inputType="number"
-            android:text="90"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+
+            />
 
 
         <Button

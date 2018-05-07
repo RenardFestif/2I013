@@ -56,4 +56,5 @@
             android:text="Annuler"
             android:textAllCaps="false" />
     </LinearLayout>
+
 </LinearLayout>

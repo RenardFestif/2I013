@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import l2i013.musidroid.util.InstrumentName;
-
+import model.Global;
 
 
 public class InstrumentActivity extends AppCompatActivity implements View.OnClickListener{
@@ -23,11 +23,8 @@ public class InstrumentActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instrument);
 
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        //Mis au point du mode fullScreen Imerssif
+        Global.fullScreenCall(this);
 
         LinearLayout sv = (LinearLayout) findViewById(R.id.checkboxLayout);
 
@@ -66,7 +63,7 @@ public class InstrumentActivity extends AppCompatActivity implements View.OnClic
         cb.setChecked(false);
         startActivity(intent);
 
-        finish();
+
 
     }
 }

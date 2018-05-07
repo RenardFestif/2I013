@@ -11,7 +11,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="287dp"
+        android:layout_height="match_parent"
+        android:layout_weight="7"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -209,6 +210,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_weight="93"
         android:orientation="horizontal">
 
         <Button
@@ -216,15 +218,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="10"
-            android:text="Exit"
-            android:onClick="onClickExitSU"/>
+            android:onClick="onClickExitSU"
+            android:text="Exit" />
 
         <SeekBar
             android:id="@+id/seekScroll"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="90"
-            />
+            android:layout_weight="90" />
 
     </LinearLayout>
 

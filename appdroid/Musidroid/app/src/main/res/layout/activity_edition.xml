@@ -47,18 +47,13 @@
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Delete" />
+                    android:text="Add" />
 
                 <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:onClick="onClickAdd"
-                    android:text="Add" />
-
-                <android.support.design.widget.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="Edit" />
 
                 <android.support.design.widget.TabItem
@@ -70,6 +65,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Save" />
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete" />
 
             </android.support.design.widget.TabLayout>
 
@@ -104,9 +104,21 @@
         android:layout_weight="70">
 
 
+        <Button
+            android:id="@+id/button3"
+            style="@android:style/Widget.DeviceDefault.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@android:drawable/ic_media_play"
+            android:backgroundTint="@color/colorGrey"
+            android:fontFamily="@font/gloria_hallelujah"
+            android:onClick="onClickPlay" />
+
         <ImageButton
             android:id="@+id/imageButton"
-            style="@style/Widget.AppCompat.ImageButton"
+            style="@android:style/Widget.Holo.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
@@ -115,8 +127,10 @@
             android:background="@drawable/ic_launcher_background"
             android:backgroundTint="@android:color/transparent"
             android:cropToPadding="false"
+            android:elevation="@dimen/fab_margin"
             android:onClick="onClickPlay"
             android:scaleType="fitCenter"
+            android:visibility="invisible"
             app:srcCompat="@android:drawable/ic_media_play" />
 
     </RelativeLayout>
