@@ -154,63 +154,7 @@ public class ChargerActivity extends AppCompatActivity {
                 /*Fin Traitement bouton charger*/
 
 
-                /*Traitement button exporter*/
-                 Button export = (Button) mView.findViewById(R.id.export_button);
-
-                /*Cas si c'est un fichier XML*/
-                if ( fileList.get(position).contains(".xml")){
-                    export.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            //Action de lecture du Document XML
-                            String fileDir = getFilesDir()+"/"+fileList.get(position); //Chemin absolu du fichier selectionné
-
-                            String name = fileList.get(position);
-                            name.replace(".xml",".mid");
-
-                            Document document = readXML(fileDir);
-                            loadPartition(document);
-                            TheApplication app =(TheApplication) getApplication();
-
-                            File f = new File(app.getFilesDir(), "exported.mid");
-                            MidiFile2I013.write(f, Global.getPartition());
-
-                            FileOutputStream oc = null;
-                            FileInputStream fis = null;
-
-                            try {
-
-
-                                fis = new FileInputStream(f);
-                                oc = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath()+name);
-                                byte[] buf = new byte[8];
-                                int n = 0;
-                                while ((n = fis.read(buf)) >= 0) {
-                                    oc.write(buf);
-                                    buf = new byte[8];
-
-
-                                }
-
-                                oc.close();
-                                fis.close();
-                            }
-                            catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            deleteFile("exported.mid");
-
-
-
-
-
-                        }
-                    });
-                }
+                
 
                 dialog.show();
 

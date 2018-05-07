@@ -50,6 +50,8 @@ public class Samples implements MidiEventListener {
                                                 NoteName.FA, NoteName.FADIESE, NoteName.SOL, NoteName.SOLDIESE, NoteName.LA,
                                                 NoteName.LADIESE, NoteName.SI};
 
+    public static HashMap<Integer,Integer> octavePartie;
+    public static int cpt;
 
 
     public Samples(String label) {
@@ -70,9 +72,12 @@ public class Samples implements MidiEventListener {
     public void onEvent(MidiEvent midiEvent, long l) {
 
 
+        //!\ Notre model ne fonctionne pas avec les demi temps !
+
+
         NoteOn note = (NoteOn) midiEvent;
-        int index = note.getChannel();
-        
+        //int index = note.getChannel();
+
 
         //12 etant le nombre de notes diffferentes
         int notename = note.getNoteValue() % 12;
@@ -81,46 +86,51 @@ public class Samples implements MidiEventListener {
         //Instant actuel
         int instant = (int) note.getTick();
 
-        System.out.println(NOTE_NAMES[notename]+" "+octave+" "+instant+ " "+index);
+
 
 
 
         //Si InstrumentPart est déjà créee
-        if (notes.size()>=index+1) {
 
-            if (notes.get(index).containsKey(NOTE_NAMES[notename])){
-                int oldInstant = notes.get(index).get(NOTE_NAMES[notename]);
+        if (octavePartie.containsKey(octave)){
 
+            if (notes.get(octavePartie.get(octave)).containsKey(NOTE_NAMES[notename])){
+                int oldInstant = notes.get(octavePartie.get(octave)).get(NOTE_NAMES[notename]);
                 //Permet de rejouer cette note à un instant different
-                notes.get(index).remove(NOTE_NAMES[notename]);
+                notes.get(octavePartie.get(octave)).remove(NOTE_NAMES[notename]);
 
-                int duree = ((int)(note.getTick()) - oldInstant)/tempo;
+                float duree = ((note.getTick()) - oldInstant);
+                duree = duree/tempo;
+                double d = Math.ceil(duree);
 
                 /*Ici on ajout dans la partition*/
-                partitionX.addNote(index, (int)note.getTick()/tempo-duree, NOTE_NAMES[notename],duree);
+
+                partitionX.addNote(octavePartie.get(octave), (int)(note.getTick()/tempo-d), NOTE_NAMES[notename],(int)d);
 
 
             }
             else{
 
-                notes.get(index).put(NOTE_NAMES[notename], instant);
+
+                notes.get(octavePartie.get(octave)).put(NOTE_NAMES[notename], instant);
             }
 
         } else {
 
 
+                octavePartie.put(octave,cpt);
+                cpt++;
+
+                notes.add(octavePartie.get(octave),new HashMap<NoteName, Integer>());
+                notes.get(octavePartie.get(octave)).put(NOTE_NAMES[notename], instant);
+
+                partitionX.addPartX(instrumentName,octave,"Part : " +String.valueOf(octavePartie.get(octave)));
 
 
-                notes.add(index,new HashMap<NoteName, Integer>());
-                notes.get(index).put(NOTE_NAMES[notename], instant);
-
-                partitionX.addPartX(instrumentName,octave,"Part : " +String.valueOf(index));
-
-                /*Creation d'une partie*/
-            //}
 
 
         }
+
     }
 
     @Override
@@ -177,6 +187,9 @@ public class Samples implements MidiEventListener {
         //Permet de mettre les parties crées + set param de base
         //createdIndex = new ArrayList<>();
         notes = new ArrayList<>();
+
+        cpt = 0;
+        octavePartie = new HashMap<>();
 
 
         processor.start();
