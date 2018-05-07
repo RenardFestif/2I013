@@ -154,7 +154,7 @@ public class ChargerActivity extends AppCompatActivity {
                 /*Fin Traitement bouton charger*/
 
 
-                
+
 
                 dialog.show();
 
