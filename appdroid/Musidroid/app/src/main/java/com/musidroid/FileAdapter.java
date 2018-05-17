@@ -7,20 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * L'adaptateur spécifique à nos fichiers
- */
+
+//L'adaptateur spécifique à nos fichiers
 
 public class FileAdapter extends ArrayAdapter<File> {
-    /**
-     * Permet de comparer deux fichiers
-     *
-     */
+
+     //Permet de comparer deux fichiers
     private class FileComparator implements Comparator<File> {
         public int compare(File lhs, File rhs) {
             // Si lhs est un répertoire et pas l'autre, il est plus petit
@@ -42,9 +38,7 @@ public class FileAdapter extends ArrayAdapter<File> {
 
     private LayoutInflater mInflater = null;
 
-    /**
-     * Construit la vue en fonction de l'item
-     */
+     // Construit la vue en fonction de l'item
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView vue = null;
 
@@ -67,9 +61,7 @@ public class FileAdapter extends ArrayAdapter<File> {
         return vue;
     }
 
-    /**
-     * Pour trier rapidement les éléments de l'adaptateur
-     */
+     //Pour trier rapidement les éléments de l'adaptateur
     public void sort () {
         super.sort(new FileComparator());
     }

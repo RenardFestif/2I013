@@ -1,55 +1,34 @@
 package com.musidroid;
 
-
-
 import android.content.Intent;
 
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 import android.widget.Chronometer;
-
 import java.io.File;
-
 import l2i013.musidroid.util.InstrumentName;
 import l2i013.musidroid.util.MidiFile2I013;
 import l2i013.musidroid.util.NoteName;
-import model.Samples;
 import musidroid.Partition;
 
 import model.Global;
-
 
 public class Accueil extends AppCompatActivity {
 
     //Permet que les sons ne se melangent pas
     int controler = 0;
 
-
+    //Lancement de l'activité
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
-
-        Global.fullScreenCall(this);
-        //Global.isWriting = true;
-        //Samples.read(String.valueOf(R.raw.Lambada));
-        //while (Global.isWriting){
-        //
-        //}
-        //
-        ////welcome();
-        //
-        //MidiFile2I013.write(new File(app.getFilesDir(), "lambada.mid"),Global.partitions);
-
-
-
-
-
+        Global.fullScreenCall(this); //Permet le mode immersif
     }
 
+    //Permet de garder de garder le mode immersif en cas de changement d'activité
     @Override
     protected void onResume() {
         super.onResume();
@@ -60,18 +39,19 @@ public class Accueil extends AppCompatActivity {
 
     }
 
+    //Permet de lancer la musique d'accueil
     public void welcome(){
 
         Chronometer chronometer = (Chronometer) findViewById(R.id.chroo);
         final long startTime = System.currentTimeMillis();
         chronometer.start();
 
-        /**<3 MICHEL SARDOU <3**/
+        //<3 MICHEL SARDOU <3
         Partition intro = new Partition(300);
         intro.addPart(InstrumentName.TRUMPET, 5);
 
 
-        /**Voix principale**/
+        //Voix principale
         intro.addNote(0,0, NoteName.SOL,2);
         intro.addNote(0,2, NoteName.REDIESE,1);
         intro.addNote(0,3, NoteName.SOL,2);
@@ -102,7 +82,7 @@ public class Accueil extends AppCompatActivity {
         intro.addNote(0,36, NoteName.FA,4);
 
 
-        /**Voix 2**/
+        //Voix 2
 
         intro.addPart(InstrumentName.ACOUSTIC_BASS, 4);
 
@@ -119,21 +99,9 @@ public class Accueil extends AppCompatActivity {
         intro.addNote(1, 30, NoteName.DODIESE,2);
         intro.addNote(1, 33, NoteName.DODIESE,3);
         intro.addNote(1, 36, NoteName.LADIESE,4);
-       
-       
-       
-       
-
-
-
-
-
-
 
         TheApplication app =(TheApplication) this.getApplication();
-
         MidiFile2I013.write(new File(app.getFilesDir(), "intro.mid"), intro);
-
         MediaPlayer mPlayer = new MediaPlayer();
         MediaPlayer.OnPreparedListener mPrepared =
                 new MediaPlayer.OnPreparedListener() {
@@ -153,7 +121,7 @@ public class Accueil extends AppCompatActivity {
             }
         } catch (Exception e) {
         }
-
+        //On attend 8 secondes (fin de la musique) avant de passer à l'activité suivante.
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
@@ -165,11 +133,6 @@ public class Accueil extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
-
     }
 
     public void nextView(View view){

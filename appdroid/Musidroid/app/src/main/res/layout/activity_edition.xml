@@ -62,6 +62,12 @@
                     android:text="Set Tempo" />
 
                 <android.support.design.widget.TabItem
+                    android:id="@+id/TabItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set Instrument" />
+
+                <android.support.design.widget.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Save" />

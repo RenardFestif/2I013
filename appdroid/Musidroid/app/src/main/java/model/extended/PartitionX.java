@@ -85,6 +85,12 @@ public class PartitionX extends Partition{
         instrumentPartX.get(i).setName(name);
     }
 
+    public void setInstrumentPartX (int index, InstrumentName instru){
+        super.getPart(index).setInstrument(instru);
+        instrumentPartX.get(index).setInstrument(instru);
+        return;
+    }
+
     @Override
     public String toString() {
         String s = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n<Partition tempo=\""+super.getTempo()+"\">";

@@ -1,29 +1,22 @@
 package com.musidroid;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
-import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
 import model.Global;
 import model.Samples;
 
@@ -44,12 +37,9 @@ public class NavigateurActivity extends AppCompatActivity {
     //Couleur voulue pour les répertoires
     private int mColor = 0;
 
-
     //Indique si l'utilisateur est à la racine ou pas
     //Pour savoir s'il veut quitter
-
     private boolean mCountdown = false;
-
 
     ListView listView;
     ArrayList<String> files = new ArrayList<>();
@@ -58,12 +48,10 @@ public class NavigateurActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigateur);
 
-
         // On récupère la ListView de notre activité
         mList = (ListView) findViewById(R.id.list_fichier);
 
         TextView title = (TextView) findViewById(R.id.text_path);
-
 
         // On vérifie que le répertoire externe est bien accessible
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
@@ -74,7 +62,6 @@ public class NavigateurActivity extends AppCompatActivity {
             // S'il l'est, on déclare qu'on veut un menu contextuel sur les éléments de la liste
             registerForContextMenu(mList);
 
-
             // On récupère la racine de la carte SD pour qu'elle soit le répertoire consulté au départ
             mCurrentFile = Environment.getExternalStorageDirectory();
 
@@ -83,11 +70,10 @@ public class NavigateurActivity extends AppCompatActivity {
             title.setText(mCurrentFile.getAbsolutePath());
 
             // On récupère la liste des fichiers dans le répertoire actuel
-            //modif
             File[] fichiers = mCurrentFile.listFiles();
 
 
-            // On transforme le tableau en une structure de données de taille variable
+            // On transforme le tableau en une ArrayList
             ArrayList<File> liste = new ArrayList<File>();
             for (File f : fichiers)
                 liste.add(f);
@@ -95,10 +81,8 @@ public class NavigateurActivity extends AppCompatActivity {
             mAdapter = new FileAdapter(this, android.R.layout.simple_list_item_1, liste);
             // On ajoute l'adaptateur à la liste
             mList.setAdapter(mAdapter);
-            // On trie la liste
             mAdapter.sort();
 
-            // On ajoute un Listener sur les items de la liste
             mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 // Que se passe-t-il en cas de clic sur un élément de la liste ?
@@ -116,33 +100,7 @@ public class NavigateurActivity extends AppCompatActivity {
         }
     }
 
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            hideSystemUI();
-        }
-    }
-
-    private void hideSystemUI() {
-
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE
-
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
-    }
-
-
-    /**
-     * On enlève tous les éléments de la liste
-     */
-
+     //On enlève tous les éléments de la liste
     public void setEmpty() {
         // Si l'adaptateur n'est pas vide…
         if (!mAdapter.isEmpty())
@@ -150,11 +108,9 @@ public class NavigateurActivity extends AppCompatActivity {
             mAdapter.clear();
     }
 
-    /**
-     * Utilisé pour naviguer entre les répertoires
-     *
-     * @param pFile le nouveau répertoire dans lequel aller
-     */
+
+     //Utilisé pour naviguer entre les répertoires
+     // @param pFile le nouveau répertoire dans lequel aller
 
     public void updateDirectory(File pFile) {
         // On change le titre de l'activité
@@ -205,11 +161,8 @@ public class NavigateurActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    /**
-     * Utilisé pour visualiser un fichier
-     *
-     * @param pFile le fichier à visualiser
-     */
+     // Utilisé pour visualiser un fichier
+     // @param pFile le fichier à visualiser
     private void seeItem(File pFile) {
 
         Intent i = new Intent(Intent.ACTION_VIEW);
@@ -220,41 +173,7 @@ public class NavigateurActivity extends AppCompatActivity {
 
             File f = new File(pFile.getAbsolutePath());
 
-
             Samples.read(f.getAbsolutePath());
-
-            //FileOutputStream oc = null;
-            //FileInputStream fis = null;
-            //
-            //try {
-            //
-            //
-            //    fis = new FileInputStream(f);
-            //    oc = openFileOutput(name, Context.MODE_PRIVATE);
-            //    //copier(f,oc);
-            //    [] buf = new byte[8];
-            //    int n = 0;
-            //    while ((n = fis.read(buf)) >= 0) {
-            //        oc.write(buf);
-            //        buf = new byte[8];
-            //
-            //
-            //    }
-            //
-            //    oc.close();
-            //    fis.close();
-            //}
-            //catch (FileNotFoundException e) {
-            //    e.printStackTrace();
-            //}
-            //catch (IOException e) {
-            //    e.printStackTrace();
-            //}
-
-            //Intent intent = new Intent(this, ChargerActivity.class);
-            ////Flag pôur faire revenir au top ChargerActivity
-            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            //startActivity(intent);
 
             while (Global.isWriting){
                              /*On attend la fin de la creation de la partition*/
@@ -265,30 +184,7 @@ public class NavigateurActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Ce n'est pas un fichier MIDI", Toast.LENGTH_SHORT).show();
         }
-
-
     }
-
-    public static boolean copier(File source, FileOutputStream dest) {
-        try (InputStream sourceFile = new java.io.FileInputStream(source);
-             OutputStream destinationFile = dest) {
-            // Lecture par segment de 0.5Mo
-            byte buffer[] = new byte[512 * 1024];
-            int nbLecture;
-            while ((nbLecture = sourceFile.read(buffer)) != -1) {
-                destinationFile.write(buffer, 0, nbLecture);
-            }
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-            return false;
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            return false;
-        }
-
-        return true;
-    }
-
 
     public void onMidiCharger() {
         Intent intent = new Intent(this, EditionActivity.class);

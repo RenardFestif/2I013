@@ -90,23 +90,6 @@ public class Model {
             }
             xys.add(new Position(x + (int) (offset * pas), y, d));
             partitionX.addNote(position, caseX + offset, noteName, d);
-        //}
-        //else{
-        //    /*Debug*/
-        //    System.out.println(x);
-        //    System.out.println(x + (int) (offset * pas));
-        //    /*Fin*/
-        //    for (int i = 0; i < xys.size(); i++) {
-        //        if (xys.get(i).getX() == x && xys.get(i).getY() == y) {
-        //            xys.remove(i);
-        //            partitionX.removeNote(position, caseX + offset, noteName);
-        //            return;
-        //        }
-        //    }
-        //    xys.add(new Position(x , y, d));
-        //    partitionX.addNote(position, caseX + offset, noteName, d);
-        //}
-
 
     }
     /**Dans Edition Activity on recharge un nouveau model on le calque sur PartionX**/

@@ -6,6 +6,7 @@
     android:id="@+id/octaveLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:orientation="horizontal"
     tools:context="com.musidroid.NameActivity">
 
@@ -28,16 +29,16 @@
         android:layout_alignParentStart="true"
         android:fontFamily="@font/gloria_hallelujah"
         android:gravity="start"
-        android:paddingTop="5dp"
-        android:paddingStart="@dimen/fab_margin"
         android:paddingEnd="@dimen/fab_margin"
-        android:text="Set Name"
-        android:textSize="15sp"
-
+        android:paddingStart="@dimen/fab_margin"
+        android:paddingTop="5dp"
         android:shadowColor="@color/colorLightBlack"
         android:shadowDx="5"
+
         android:shadowDy="5"
-        android:shadowRadius="5"/>
+        android:shadowRadius="5"
+        android:text="Set Name"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/textPartThree"
@@ -46,12 +47,12 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
 
-        android:text="Part Three"
-        android:textSize="40sp"
+        android:layout_marginTop="-10sp"
         android:fontFamily="@font/gloria_hallelujah"
+        android:text="Part Three"
         android:textColor="@color/colorLightBlack"
 
-        android:layout_marginTop="-10sp"/>
+        android:textSize="40sp" />
 
     <TextView
 
@@ -79,10 +80,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:text="@string/back"
         android:fontFamily="@font/gloria_hallelujah"
-        android:textSize="15sp"
-        android:onClick="preView"/>
+        android:onClick="preView"
+        android:text="@string/back"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/nameEditText"
@@ -90,9 +91,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:hint="Name"
         android:ems="10"
         android:fontFamily="@font/gloria_hallelujah"
+        android:hint="Name"
         android:inputType="text|textPersonName"
         android:selectAllOnFocus="true"
         android:singleLine="true"
